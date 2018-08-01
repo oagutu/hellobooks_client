@@ -1,5 +1,381 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+html {height: 100%;}
+
+body {height: 100%;}
+
+.main-container {height: 100%; }
+
+.navbar {
+    background: white;
+    padding: 0;
+    min-height: 50px;
+    text-align: left;
 }
+
+.brand-log {
+    color: black;
+    position: relative;
+    left: 50%;
+}
+
+.brand-main {
+    color: black;
+    margin-left: 20px;
+    /* position: unset; */
+}
+
+.brand-main:hover {
+    color: white;
+}
+
+.fixed-top {
+    background: tomato;
+}
+
+.ml-auto .nav-item>a {
+    color: white;
+    font-size: 12px;
+}
+
+.ml-auto .active >a{
+    color: black;
+    font-size: 13px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(77, 148, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.hidden-nav .nav-item .nav-link {
+    visibility: hidden;
+    color: white;
+}
+
+.navbar-collapse {
+    background: tomato;
+    z-index: 50;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    background-color: #d9d9d9;
+    /* border-right: tomato solid 1px; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-x: hidden;
+    padding-top: 100px;
+}
+
+.sidenav>ul {
+    list-style-type: none;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.sidenav>ul>li {
+    padding: 10px 0;
+}
+
+.sidenav>ul>li>a {
+    color: tomato;
+    margin: auto;
+}
+
+.sidenav>ul>li>a:hover {
+    color: black;
+    text-decoration-line: none;
+}
+
+.sidenav>ul .active>a {
+    color: black;
+    font-size: 23px;
+}
+
+/*----end of main nav----*/
+
+/*profile*/
+
+.profile-sec {
+    display: block;
+    margin-left: 160px;
+    margin-top: 60px;
+    padding-left: 10px;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.profile-info {
+    padding: 0;
+}
+
+.profile-pic{
+    border-radius: 15px;
+}
+
+.profile-details{
+    padding-left: 20px;
+    /* background: #d9d9d9; */
+    font-family: 'Noto Sans',sans-serif;
+    border: tomato solid 1px;
+    padding-top: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile-details>p {
+    font-size: 15px;
+}
+
+.profile-tag{
+    padding-bottom: 5px;
+    margin: 8px;
+}
+
+.edit-icon{
+    position: absolute;
+    bottom:5px;
+    right: 5px;
+}
+
+.profile-tags{
+    background: #d9d9d9;
+}
+.borrowed-sec{
+    margin-left: 160px;
+    
+}
+.borrowed-table{
+    margin-top: 60px;
+    width: 100%;
+}
+.borrowed-header{
+    border-radius: 13px;
+}
+.borrowed-header>th{
+    background-color: tomato;
+    color: white;
+}
+
+.borrowed-row >th, .borrowed-header >th{
+    padding: 15px 5px;
+    text-align: center;
+    border-top: tomato solid 0.5px;
+}
+.status{
+    font-style: italic;
+}
+.return-btn >a{
+    color: white;
+}
+.return-btn>a:hover{
+    color: black;
+    font-size: 25px;
+}
+
+.return-collapse{
+    margin-top:40px;
+}
+
+/*end of profile*/
+
+/*library*/
+
+.lib-search{
+    margin-left: 160px;
+    margin-top: 70px;
+}
+
+.indv-book-deatails{
+    margin-bottom: 10px;
+}
+
+.lib-filter {
+    background: #d9d9d9;
+    padding: 10px 10px;
+    border-radius: 10px;
+    /* position: -webkit-sticky;
+    position: sticky;
+    top: 50px; */
+}
+
+.lib-filter >label{font-size: 12px;}
+.lib-filter >select >option{font-size: 13px;}
+.lib-filter>select>option:hover {
+    color:white;
+    background: tomato;
+}
+.searchbox{font-style: italic;font-size: 12px;}
+
+.library-sec{
+    margin-left: 160px;
+    margin-top: 60px;
+}
+
+.bk-cover-pic{
+    width:100%;
+    height: auto;
+    border-radius: 10px;
+}
+.book-genre{color: tomato;}
+.book-sub-genre{color: black;}
+.copies-available {color: #47d147;}
+.book-synopsis{font-size:14px;}
+
+.borrow-icon >button >i{color: tomato;}
+/* .copies-tot{color: slategrey;} */
+
+/*end of library*/
+
+/*history*/
+.history-sec{
+    margin-left: 160px;
+    margin-top: 60px;
+}
+
+.history-table{
+    width: 100%;
+}
+.history-header >th{
+    border-top: #d9d9d9;
+}
+
+.history-row, .history-header{
+    padding: 15px 5px;
+    text-align: center;
+}
+
+.history-table tr:nth-child(even){
+    background: tomato;
+    color:white;
+    font-size: 14px;
+}
+
+.history-header >th{border-top: black solid 1.5px;}
+.history-row >th{
+    font-size: 13px;
+}
+
+/*end of history*/
+
+
+/*addbook*/
+
+.addbook-sec{
+    margin-left: 160px;
+    margin-top: 60px;
+}
+updatebook-sec {
+    margin-left: 160px;
+    margin-top: 60px;
+}
+
+.addbook-container, .updatebook-container{
+    width: 50%;
+    /* margin-top: 35%; */
+}
+
+.addbook_form >input, .addbook_form >textarea{
+    width: 100%;
+    margin: 15px 5px;
+}
+.addbook_form >select{
+    margin: 15px 15px;
+}
+.upload-cover-pic{
+    background: #47d147;
+    color: white;
+    border-radius: 10px;
+    border:none;
+}
+.upload-cover-pic:hover{
+    cursor: pointer;
+    font-size: 15px;
+}
+.savebook_btn,
+.addbook_btn,
+.deletebook_btn {
+    border-radius: 10px;
+    border: none;
+}
+.savebook_btn:hover,
+.addbook_btn:hover,
+.deletebook_btn:hover {
+    cursor: pointer;
+    font-size: 18px;
+}
+.savebook_btn:hover{
+    color:tomato;
+}
+.addbook_btn{
+    background: tomato;
+    color: white;
+}
+.deletebook_btn{
+    background: red;
+    color: white;
+}
+
+/*addbook*/
+
+@media(max-width:540px) {
+    .navbar-brand {
+        left: 10px;
+    }
+    .login-container {
+        width: 100%;
+    }
+
+    /*main*/
+    .sidenav{
+        width: 40px;
+    }
+    .sidenav>ul{
+        padding-left: 8px;
+    }
+    .nav-term{
+        visibility: hidden;
+    }
+
+    .sidenav>ul>li {
+        padding: 2px 0;
+    }
+
+    /*profile*/
+
+    .profile-sec {
+        display: block;
+        margin-left: 40px;
+        margin-top: 60px;
+    }
+    
+    .borrowed-table {
+        margin-top: 30px;
+    }
+    .borrowed-row>th, .borrowed-header>th {
+        padding: 5px 2px;
+    }
+
+    /*library*/
+    .bk-cover-pic {max-width: 70%;}
+    .book-synopsis {font-size: 10px;max-width: 90%;}
+
+    /*general*/
+    .borrowed-sec,
+    .lib-search,
+    .library-sec,
+    .addbook-sec,
+    .history-sec {
+        margin-left: 40px;
+    }
+
+    /*addbook*/
+
+    .addbook-container{
+        width: 100%;
+    }
+
+}
+
