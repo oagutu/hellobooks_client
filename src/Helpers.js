@@ -1,4 +1,4 @@
-const send = (data, method='POST', path, headerRequired=true) => {
+const send = (data, method = 'POST', path, headerRequired = true) => {
     const url = "http://127.0.0.1:5000"
     var headers = {'Content-Type': 'application/json'}
     const access_token = localStorage.getItem('hb_access_token')
