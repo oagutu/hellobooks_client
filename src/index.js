@@ -5,11 +5,12 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
-import App from './landing/index.jsx'; 
+import App from './landing/index';
+import Home from './home/index';
 import registerServiceWorker from './registerServiceWorker';
 
 
-const TestHome = () => <h2>logged In</h2>;
+const Test = () => <h2>TESTED!</h2>;
 
 // Represents all protected routes
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -28,7 +29,8 @@ const Main = () => {
       <div className="main-container">
         <Switch>
           <Route exact path="/" component={App} />
-          <PrivateRoute path="/test_home" component={TestHome} />
+          <PrivateRoute path="/test_home" component={Home} />
+          <PrivateRoute path="/test_add" component={Test} />
         </Switch>
       </div>
     </Router>
