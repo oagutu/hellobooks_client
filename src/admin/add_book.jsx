@@ -30,6 +30,7 @@ class Add extends Component {
     const book_details = Object.assign({},
       this.state.book_details,
       {book_code: Number(this.state.book_details.book_code)})
+
     send(book_details, 'POST', '/api/v1/books')
     .then(response => {
       return response.json()

@@ -1,5 +1,5 @@
 const send = (data, method = 'POST', path, headerRequired = true) => {
-  const url = 'http://127.0.0.1:5000'
+  const url = 'http://127.0.0.1:5000';
   let headers = { 'Content-Type': 'application/json' };
   const accessToken = localStorage.getItem('hb_access_token');
   if (!['undefined', null].includes(accessToken) && headerRequired) {
