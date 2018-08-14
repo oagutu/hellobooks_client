@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './landing/index';
 import Home from './home/index';
+import Add from './admin/add_book';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -30,7 +31,7 @@ const Main = () => {
         <Switch>
           <Route exact path="/" component={App} />
           <PrivateRoute path="/test_home" component={Home} />
-          <PrivateRoute path="/test_add" component={Test} />
+          <PrivateRoute path="/add-update" component={Add} />
         </Switch>
       </div>
     </Router>

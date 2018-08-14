@@ -23,9 +23,6 @@ class SigninForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    localStorage.removeItem('hb_access_token')
-    localStorage.setItem('isAuthenticated', false)
-    localStorage.removeItem('hb_user_role')
     this.setState({showAlert: false})
     send(this.state.user_details, 'POST', '/api/v1/auth/login')
     .then(response => {return response.json()})
@@ -34,9 +31,9 @@ class SigninForm extends Component {
             localStorage.setItem('hb_access_token', data.access_token)
             localStorage.setItem('isAuthenticated', true)
             localStorage.setItem('hb_user_role', data.role)
+            const isAdmin = data.role === 'admin' ? true : false
+            localStorage.setItem('isAdmin', isAdmin)
             this.setState({redirectToReferrer:true})
-            // console.log(data.msg)
-            // console.log(localStorage.getItem('access_token'))
           }
       else if(data.msg.includes("Token has expired")){
         localStorage.removeItem('hb_access_token')
