@@ -8,10 +8,11 @@ import './admin.css';
 
 class Add extends Component {
   state = {
-    book_details:{title:"", author:"", code:"", ddc_code:"", synopsis:"", genre:"", subgenre:""},
+    book_details:{title:"", author:"", book_code: Number, ddc_code:"", synopsis:"", genre:"", subgenre:""},
     showAlert: false,
     error_message: "",
-    redirectToReferrer:false
+    redirectToReferrer:false,
+    referred: ""
   }
 
   handleChange = (e) => {
@@ -25,18 +26,41 @@ class Add extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.setState({showAlert:false})
-    send(this.state.book_details, 'POST', '/api/v1/books')
+    // Helps convert book code to integer type as is required by  add book endpoint.
+    const book_details = Object.assign({},
+      this.state.book_details,
+      {book_code: Number(this.state.book_details.book_code)})
+    send(book_details, 'POST', '/api/v1/books')
     .then(response => {
       return response.json()
     })
-    .then(data => {this.setState({
-      showAlert: !this.state.showAlert,
-      error_message: data.msg
-    })})
+    .then(data => {
+      console.log(data)
+      if(Object.values(data).toString().includes('Successfully')){
+        this.setState({
+        showAlert: !this.state.showAlert,
+        error_message: data.msg,
+        referred: '/home',
+        redirectToReferrer: true})
+      }
+      else{
+        this.setState({
+          showAlert: !this.state.showAlert,
+          error_message: data.msg})
+      }
+    })
   }
 
   render(){
+
+    const { from } = this.props.location || { from: { pathname: this.state.referred } }
+
+    if (this.state.redirectToReferrer === true) {
+      return <Redirect to= {from} />
+    }
+
     return (
+      
       <div className="container body-sec">
 
         <Alert isOpen={this.state.showAlert} color="warning">
@@ -46,7 +70,7 @@ class Add extends Component {
         <h2 className="page-header">Add a Book:</h2>
         <form className="addbook_form" onSubmit={this.handleSubmit}>
           <input type="text" id="title" placeholder="title" onChange={this.handleChange}/><br/>
-          <input type="text" id="code" placeholder="code" onChange={this.handleChange}/>
+          <input type="number" id="book_code" placeholder="code" onChange={this.handleChange}/>
           <input type="text" id="ddc_code" placeholder="DDC code" onChange={this.handleChange}/><br/>
           <input type="text" id="author" placeholder="author" onChange={this.handleChange}/><br/>
           <textarea

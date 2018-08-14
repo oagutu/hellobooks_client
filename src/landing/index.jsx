@@ -52,7 +52,7 @@ class SigninForm extends Component {
 
   render() {
 
-    const { from } = this.props.location || { from: { pathname: '/test_home' } }
+    const { from } = this.props.location || { from: { pathname: '/home' } }
 
     if (this.state.redirectToReferrer === true) {
       return <Redirect to= {from} />

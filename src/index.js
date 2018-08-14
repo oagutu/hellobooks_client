@@ -30,8 +30,8 @@ const Main = () => {
       <div className="main-container">
         <Switch>
           <Route exact path="/" component={App} />
-          <PrivateRoute path="/test_home" component={Home} />
-          <PrivateRoute path="/add-update" component={Add} />
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/add-book" component={Add} />
         </Switch>
       </div>
     </Router>

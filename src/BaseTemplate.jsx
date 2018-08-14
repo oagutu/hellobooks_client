@@ -65,7 +65,7 @@ class BaseTemplate extends Component {
               <div hidden={!this.state.isAdmin}>
                 <DropdownItem header>Admin</DropdownItem>
                 <DropdownItem id="logs">{!this.state.isAdmin}</DropdownItem>
-                <DropdownItem id="add-update-book" onClick={this.handleClick} value='/add-update'><i className="fa fa-plus"></i>Add/Update Book</DropdownItem>
+                <DropdownItem id="add-ook" onClick={this.handleClick} value='/add-book'><i className="fa fa-plus"></i>Add/Update Book</DropdownItem>
                 <DropdownItem id="members"><i className="fa fa-users"></i>Members' List</DropdownItem>
                 <DropdownItem id="logs"><i className="fa fa-th"></i>Logs</DropdownItem>
               </div>
