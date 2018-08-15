@@ -108,7 +108,7 @@ class Add extends Component {
 }
 
 
-class AddUpdate extends Component {
+class AddMain extends Component {
   render() {
     return (
       <div className="container">
@@ -119,4 +119,4 @@ class AddUpdate extends Component {
   }
 }
 
-export default AddUpdate;
+export default AddMain;

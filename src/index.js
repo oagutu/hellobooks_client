@@ -8,6 +8,7 @@ import './index.css';
 import App from './landing/index';
 import Home from './home/index';
 import Add from './admin/add_book';
+import Members from './admin/members';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -32,6 +33,7 @@ const Main = () => {
           <Route exact path="/" component={App} />
           <PrivateRoute path="/home" component={Home} />
           <PrivateRoute path="/add-book" component={Add} />
+          <PrivateRoute path="/all-members" component={Members} />
         </Switch>
       </div>
     </Router>

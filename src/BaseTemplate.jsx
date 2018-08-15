@@ -46,7 +46,7 @@ class BaseTemplate extends Component {
 
     return (
         <nav className="navbar fixed-top">
-          <a className="navbar-brand brand-main" href="library.html">
+          <a className="navbar-brand brand-main" href="/">
               hello
             <b style={{ color: 'white' }}>
                books
@@ -66,7 +66,7 @@ class BaseTemplate extends Component {
                 <DropdownItem header>Admin</DropdownItem>
                 <DropdownItem id="logs">{!this.state.isAdmin}</DropdownItem>
                 <DropdownItem id="add-ook" onClick={this.handleClick} value='/add-book'><i className="fa fa-plus"></i>Add/Update Book</DropdownItem>
-                <DropdownItem id="members"><i className="fa fa-users"></i>Members' List</DropdownItem>
+                <DropdownItem id="members"onClick={this.handleClick} value='/all-members'><i className="fa fa-users"></i>Members' List</DropdownItem>
                 <DropdownItem id="logs"><i className="fa fa-th"></i>Logs</DropdownItem>
               </div>
               <DropdownItem divider />
