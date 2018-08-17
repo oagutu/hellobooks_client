@@ -40,9 +40,9 @@ class EditRoleForm extends Component {
     return (
 
       <form className="container edit-role-form" onSubmit={this.handleSubmit}>
-        <Alert isOpen={this.state.showAlert} color="warning">
-          {this.state.error_message}
-        </Alert>
+       <Alert isOpen={this.state.showAlert} color="warning">
+         {this.state.error_message}
+      </Alert>
 
         <select id="user-role" onChange={this.handleChange}>
           <option value="select_role" disabled>Select role</option>
@@ -137,7 +137,6 @@ class MemberMain extends Component {
   render() {
     return (
       <div className="container">
-        <BaseTemplate />
         <MemberTable members={this.state.members}/>
       </div>
       )

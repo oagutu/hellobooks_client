@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import Navbar from './BaseTemplate';
 import App from './landing/index';
 import Home from './home/index';
 import Add from './admin/add_book';
@@ -29,6 +30,7 @@ const Main = () => {
   return (
     <Router>
       <div className="main-container">
+        <Navbar />
         <Switch>
           <Route exact path="/" component={App} />
           <PrivateRoute path="/home" component={Home} />

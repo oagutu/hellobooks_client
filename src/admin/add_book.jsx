@@ -112,11 +112,11 @@ class AddMain extends Component {
   render() {
     return (
       <div className="container">
-        <BaseTemplate />
         <Add />
       </div>
     )
   }
 }
 
+export {Add};
 export default AddMain;

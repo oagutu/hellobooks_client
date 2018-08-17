@@ -57,9 +57,11 @@ body {height: 100%;}
 .dropdown-item{
     font-size: 12px;
 }
-
-.dropdown-item>i{
+.dropdown-item>a>i {
     padding-right: 7px;
+}
+.dropdown-item>a{
+    color: black;
 }
 .dropdown-header {
     font-size: 10px;

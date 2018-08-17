@@ -105,11 +105,6 @@ class App extends Component {
   render() {
     return (
       <div className="Landing">
-        <nav className="navbar">
-          <a className="navbar-brand brand-log" href="/">hello
-            <b style={{ color:"tomato" }}>books</b>
-          </a> 
-        </nav>
         <div className="container login-main">
           <div className="row login-row">
             <div className="col-md-7 login-left signin-left">
