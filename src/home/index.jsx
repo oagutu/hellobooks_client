@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Alert, Table, Tooltip, Button , Modal, ModalHeader, ModalBody} from 'reactstrap';
 import send from '../Helpers';
-import BaseTemplate from '../BaseTemplate.jsx';
-import {Add} from '../admin/add_book';
+import AddEdit from '../admin/add_edit_book';
 import './home.css';
 
 
@@ -16,7 +15,7 @@ class EditBookForm extends Component {
 
   render () {
     return (
-       <Add header='Edit book'/>
+       <AddEdit header='Edit book'/>
     )
   }
 }
@@ -32,7 +31,7 @@ class BookRow extends Component{
     }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <tr>
         <td value={this.props.value}>{this.props.value}</td>

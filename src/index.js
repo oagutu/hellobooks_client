@@ -13,7 +13,7 @@ import Members from './admin/members';
 import registerServiceWorker from './registerServiceWorker';
 
 
-const Test = () => <h2>TESTED!</h2>;
+// const Test = () => (<h2>TESTED!</h2>);
 
 // Represents all protected routes
 const PrivateRoute = ({ component: Component, ...rest }) => (

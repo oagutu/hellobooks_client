@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import send from '../Helpers';
 import './landing.css';
@@ -27,10 +28,13 @@ class SignupForm extends Component {
       .then(response => {
         return response.json()
       })
-      .then(data => {this.setState({
+      .then(data => {
+        this.setState({
           showAlert: !this.state.showAlert,
           error_message: data.msg
-        })})
+        })
+        this.props.history.push({ pathname: '/' })        
+      })
     }
   
     render(){
@@ -60,4 +64,4 @@ class SignupForm extends Component {
     }
   }
 
-  export default SignupForm;
+  export default withRouter(SignupForm);
