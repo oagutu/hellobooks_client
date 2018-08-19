@@ -101,12 +101,12 @@ class Books extends Component {
 class Home extends Component {
   state = { books:[]}
 
-  componentDidMount = (e) => {
+  componentDidMount = () => {
     send({}, 'GET', '/api/v1/books')
     .then(response => {return response.json()})
     .then(data => {
       this.setState({books:data.books})
-      console.log(this.state)
+      // console.log("home>> ", this.state)
     })
   }
 

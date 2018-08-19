@@ -26,21 +26,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-const Main = () => {
-  return (
-    <Router>
-      <div className="main-container">
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={App} />
-          <PrivateRoute path="/home" component={Home} />
-          <PrivateRoute path="/add-book" component={Add} />
-          <PrivateRoute path="/all-members" component={Members} />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+const Main = () => (
+  <Router>
+    <div className="main-container">
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={App} />
+        <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/add-book" component={Add} />
+        <PrivateRoute path="/all-members" component={Members} />
+      </Switch>
+    </div>
+  </Router>
+);
 
 ReactDOM.render(<Main />, document.getElementById('root'));
 registerServiceWorker();

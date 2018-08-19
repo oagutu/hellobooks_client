@@ -11,7 +11,6 @@ class SigninForm extends Component {
     show: false,
     showAlert: false,
     error_msg: "",
-    redirectToReferrer:false
   }
 
   handleChange = (e) => {
@@ -32,8 +31,9 @@ class SigninForm extends Component {
             localStorage.setItem('isAuthenticated', true)
             localStorage.setItem('hb_user_role', data.role)
             const isAdmin = data.role === 'admin' ? true : false
-            localStorage.setItem('isAdmin', isAdmin)
-            this.setState({redirectToReferrer:true})
+            this.setState({isAdmin})
+            this.setState({isAuthenticated: true})
+            // console.log("sign-in", this.state)
           }
       else if(data.msg.includes("Token has expired")){
         localStorage.removeItem('hb_access_token')
@@ -54,7 +54,7 @@ class SigninForm extends Component {
 
     const { from } = this.props.location || { from: { pathname: '/home' } }
 
-    if (this.state.redirectToReferrer === true) {
+    if (this.state.isAuthenticated === true) {
       return <Redirect to= {from} />
     }
 
@@ -127,4 +127,4 @@ class App extends Component {
 
 export default App;
 
-// TODO: Mobve navbar into login-main container so landing page only occupies window ie. no scrolling 
+// TODO: Move navbar into login-main container so landing page only occupies window ie. no scrolling 

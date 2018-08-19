@@ -4,39 +4,44 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap'
 import send from './Helpers';
 import './index.css';
 
+/** Navbar template component that is shared by all other components in the hello books app */
 class BaseTemplate extends Component {
 
+  /** Component state holds data on state of menu dropdown, admin statut and active tab/page  */
   state = {
       active: "",
       dropdownOpen: false,
       isAdmin: false,
-      isAuthenticated:false,
   }
 
+  /** Log out already logged in user. */
   handleLogOut = () => {
     send({}, 'POST', '/api/v1/auth/logout')
       .then((response) => { return response.status; })
       .then((status) => {
         if (status === 200 || status === 401){
-          console.log(this.props.history)
           localStorage.clear()
           this.props.history.push({ pathname: '/' })
         }
       });
   };
 
+  /** Toggle state of dropdown menu to make visible when required. */
   toggle = () => {
-      // console.log(this.state.isAdmin)
       this.setState({dropdownOpen:!this.state.dropdownOpen})
   };
 
+ componentDidMount = () => {
+  // Set role of logged in user ie. if they are an admin or not
+  const role = localStorage.getItem('hb_user_role')
+  const isAdmin = role === 'admin' ? true : false
+  this.setState({isAdmin})
+ }
+
+  /** Renders navbar based on whether a user is logged in or not. */
   render() {
-
-    const { from } = this.props.location || { from: { pathname: this.state.referred } }
-    // console.log("State asda: ", this.state.isAdmin)
-
-    // if (this.state.redirectToReferrer == true){}
     
+  
     if (!localStorage.getItem('isAuthenticated')){
       return (
         <nav className="navbar">
@@ -63,9 +68,9 @@ class BaseTemplate extends Component {
             <DropdownMenu>
               <DropdownItem id="prof-btn"><Link to="/profile"><i className="fa fa-user"></i>Profile</Link></DropdownItem>
               <DropdownItem id="history"><Link to="/borrow-history"><i className="fa fa-history"></i>History</Link></DropdownItem>
-              <DropdownItem divider />
               {/* Displayed only if user logged in with admin account */}
-              <div>
+              <div hidden={!this.state.isAdmin}>
+                <DropdownItem divider />
                 <DropdownItem header>Admin</DropdownItem>
                 <DropdownItem id="logs">{this.state.isAdmin}</DropdownItem>
                 <DropdownItem id="add-book"><Link to="/add-book"><i className="fa fa-plus"></i>Add/Update Book</Link></DropdownItem>
