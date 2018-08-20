@@ -4,7 +4,7 @@ import './admin.css';
 
 const AddMain = () => (
   <div className="container">
-    <AddEdit />
+    <AddEdit path="/api/v1/books" method="POST" />
   </div>
 );
 

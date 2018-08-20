@@ -4,12 +4,12 @@ const send = (data, method = 'POST', path, headerRequired = true) => {
   const body = JSON.stringify(data);
   const accessToken = localStorage.getItem('hb_access_token');
   if (!['undefined', null].includes(accessToken) && headerRequired) {
-    // console.log(`>>> ${accessToken}`);
     const token = `Bearer ${accessToken}`;
-    headers = Object.assign({}, { Authorization: token });
+    headers = Object.assign({}, headers, { Authorization: token });
   }
 
-  const myRequest = method === 'POST' ? new Request(url + path, { method, body, headers })
+  const methods = ['POST', 'PUT'];
+  const myRequest = methods.includes(method) ? new Request(url + path, { method, body, headers })
     : new Request(url + path, { method, headers });
 
   return fetch(myRequest);

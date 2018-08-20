@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { Alert, Table, Tooltip, Button , Modal, ModalHeader, ModalBody} from 'reactstrap';
 import send from '../Helpers';
 import AddEdit from '../admin/add_edit_book';
 import './home.css';
 
-
-class EditBookForm extends Component {
+/** Edit sintle book entry component */
+class EditBook extends Component {
     state = {
-    book_details:{title:"", author:"", book_code: Number, ddc_code:"", synopsis:"", genre:"", subgenre:""},
-    showAlert: false,
-    error_message: "",
+    path: `/api/v1/books/${this.props.book_details.value}`,
+    method: 'PUT',
   }
 
   render () {
     return (
-       <AddEdit header='Edit book'/>
+       <AddEdit
+       isHeader={true}
+       details={this.props.book_details}
+       path={this.state.path }
+       method={this.state.method}/>
     )
   }
 }
 
-
+/** Component for each book entry/row. */
 class BookRow extends Component{
   state = {tooltipOpen: false, show: {edit: false, delete: false}}
 
@@ -31,7 +33,6 @@ class BookRow extends Component{
     }
 
   render() {
-    // console.log(this.state)
     return (
       <tr>
         <td value={this.props.value}>{this.props.value}</td>
@@ -42,15 +43,15 @@ class BookRow extends Component{
         <td value={this.props.sub_genre}>{this.props.sub_genre}</td>
         <td value={this.props.synopsis}>{this.props.synopsis}</td>
         <td value="actions">
-          <Button onClick= {this.toggle} className="edit-book-btn"><i className="fa fa-edit"/></Button>
+          <Button onClick= {this.toggle} className="edit-book-btn"  hidden={!this.props.isAdmin}><i className="fa fa-edit"/></Button>
           {/* <Button onClick= {this.toggle} className="delete-book-btn"><i className="fa fa-trash"/></Button> */}
         </td>
 
         <Modal isOpen={this.state.show.edit} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Edit User Status:</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit Book:</ModalHeader>
           <ModalBody>
             <div>{this.state.show.edit}</div>
-          <EditBookForm user={this.props.username}/>
+          <EditBook book_details={this.props}/>
           </ModalBody>
         </Modal>
       </tr>
@@ -59,10 +60,17 @@ class BookRow extends Component{
 }
 
 class Books extends Component {
+  state = {isAdmin: false}
+
+  componentDidMount =() => {
+    // Set role of logged in user ie. if they are an admin or not. Used to hide admin actions.
+    const role = localStorage.getItem('hb_user_role')
+    const isAdmin = role === 'admin' ? true : false
+    this.setState({isAdmin})
+  }
   render(){
 
     const books = this.props.books;
-    // console.log(books)
 
     return (
       <div className="container body-sec">
@@ -86,9 +94,11 @@ class Books extends Component {
                 title={m.title}
                 author={m.author}
                 book_code={m.book_code}
+                ddc_code={m.ddc_code}
                 genre={m.genre}
                 sub_genre={m.sub_genre}
                 synopsis={m.synopsis}
+                isAdmin={this.state.isAdmin}
                 />)}
             </tbody>
           </Table>
@@ -105,7 +115,7 @@ class Home extends Component {
     .then(response => {return response.json()})
     .then(data => {
       this.setState({books:data.books})
-      // console.log("home>> ", this.state)
+      // console.log("home>> ", data)
     })
   }
 

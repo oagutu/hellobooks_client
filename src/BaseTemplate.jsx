@@ -72,7 +72,6 @@ class BaseTemplate extends Component {
               <div hidden={!this.state.isAdmin}>
                 <DropdownItem divider />
                 <DropdownItem header>Admin</DropdownItem>
-                <DropdownItem id="logs">{this.state.isAdmin}</DropdownItem>
                 <DropdownItem id="add-book"><Link to="/add-book"><i className="fa fa-plus"></i>Add/Update Book</Link></DropdownItem>
                 <DropdownItem id="members"><Link to="/all-members"><i className="fa fa-users"></i>Members' List</Link></DropdownItem>
                 <DropdownItem id="logs"><Link to="/home"><i className="fa fa-th"></i>Logs</Link></DropdownItem>
