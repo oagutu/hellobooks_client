@@ -8,8 +8,8 @@ import './index.css';
 import Navbar from './BaseTemplate';
 import App from './landing/index';
 import Home from './home/index';
-import Add from './admin/add_book';
-import Members from './admin/members';
+import Add from './admin/books/add_book';
+import Members from './admin/members/members';
 import registerServiceWorker from './registerServiceWorker';
 
 

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Alert } from 'reactstrap';
-import send from '../Helpers';
-import './admin.css';
+import send from '../../Helpers';
+import '../admin.css';
 
 class AddEdit extends Component {
     state = {
