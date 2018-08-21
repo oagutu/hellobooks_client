@@ -1,109 +1,158 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import {Alert} from 'reactstrap';
+import { Alert } from 'reactstrap';
 import send from '../Helpers';
 import './admin.css';
 
 class AddEdit extends Component {
     state = {
-      book_details:{title:"", author:"", book_code: Number, ddc_code:"", synopsis:"", genre:"", subgenre:""},
+      bookDetails: {
+        title: '', author: '', book_code: 0, ddc_code: '', synopsis: '', genre: '', subgenre: '',
+      },
       showAlert: false,
-      error_message: "",
-    }
-  
-    handleChange = (e) => {
-      const id = e.target.id
-      const book_details = Object.assign({}, this.state.book_details)
-      book_details[id] = e.target.value
-      this.setState({book_details})
-      // console.log(this.state.book_details)
-    }
-  
-    handleSubmit = (e) => {
-      e.preventDefault()
-      this.setState({showAlert:false})
-      // Helps convert book code to integer type as is required by  add book endpoint.
-      const book_details = Object.assign({},
-        this.state.book_details,
-        {book_code: Number(this.state.book_details.book_code)})
-  
-      send(book_details, this.props.method, this.props.path)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        console.log(data)
-        if(Object.values(data).toString().includes('Successfully')){
-          this.setState({
-          showAlert: !this.state.showAlert,
-          error_message: data.msg})
-          this.props.history.push({ pathname: '/home' })
-        }
-        else{
-          this.setState({
-            showAlert: !this.state.showAlert,
-            error_message: data.msg})
-        }
-      })
+      errorMessage: '',
     }
 
     componentDidMount = () => {
-      if(this.props.isHeader){
-        console.log("+++", this.props.details)
-        const book_details = Object.assign({}, this.props.details)
-        this.setState({book_details})
+      const { details, isHeader } = this.props;
+      if (isHeader) {
+        const bookDetails = Object.assign({}, details);
+        this.setState({ bookDetails });
       }
     }
-  
-    render(){
-      // console.log(this.state.book_details)
-  
+
+    handleChange = (e) => {
+      const { id } = e.target;
+      let { bookDetails } = this.state;
+      bookDetails = Object.assign({}, bookDetails);
+      bookDetails[id] = e.target.value;
+      this.setState({ bookDetails });
+      // console.log(bookDetails);
+    }
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      this.setState({ showAlert: false });
+      let { bookDetails } = this.state;
+      const { showAlert } = this.state;
+      // Helps convert book code to integer type as is required by  add book endpoint.
+      bookDetails = Object.assign({},
+        bookDetails,
+        { book_code: Number(bookDetails.book_code) });
+      const { method, path, history } = this.props;
+
+      send(bookDetails, method, path)
+        .then(response => (
+          response.json()))
+        .then((data) => {
+          console.log(data);
+          if (Object.values(data).toString().includes('Successfully')) {
+            this.setState({
+              showAlert: !showAlert,
+              errorMessage: data.msg,
+            });
+            history.push({ pathname: '/home' });
+          } else {
+            this.setState({
+              showAlert: !showAlert,
+              errorMessage: data.msg,
+            });
+          }
+        });
+    }
+
+    render() {
+      const { showAlert, errorMessage, bookDetails } = this.state;
+      const { isHeader } = this.props;
+      // console.log(bookDetails);
+
       return (
-        
+
         <div className="container body-sec">
-  
-          <Alert isOpen={this.state.showAlert} color="warning">
-            {this.state.error_message}
+
+          <Alert isOpen={showAlert} color="warning">
+            { errorMessage }
           </Alert>
-  
-          <h2 className="page-header" hidden={this.props.isHeader}>Add a Book:</h2>
+
+          <h2 className="page-header" hidden={isHeader}>
+            Add a Book:
+          </h2>
           <form className="addbook_form" onSubmit={this.handleSubmit}>
-            <input type="text" id="title" placeholder="title" onChange={this.handleChange} value={this.state.book_details.title}/><br/>
-            <input type="number" id="book_code" placeholder="code" onChange={this.handleChange} value={this.state.book_details.book_code}/>
-            <input type="text" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={this.state.book_details.ddc_code}/><br/>
-            <input type="text" id="author" placeholder="author" onChange={this.handleChange} value={this.state.book_details.author}/><br/>
+            <input type="text" id="title" placeholder="title" onChange={this.handleChange} value={bookDetails.title} />
+            <br />
+            <input type="number" id="book_code" placeholder="code" onChange={this.handleChange} value={bookDetails.book_code} />
+            <input type="text" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={bookDetails.ddc_code} />
+            <br />
+            <input type="text" id="author" placeholder="author" onChange={this.handleChange} value={bookDetails.author} />
+            <br />
             <textarea
               id="synopsis"
               name="book_synopsis"
               placeholder="synopsis"
-              style={{ width:"100%", height:"auto"}}
+              style={{ width: '100%', height: 'auto' }}
               onChange={this.handleChange}
-              value={this.state.book_details.synopsis}>
-            </textarea><br/>
+              value={bookDetails.synopsis}
+            />
+            <br />
             genre:
-            <select name="select genre" id="genre" className="genre" onChange={this.handleChange} value={this.state.book_details.genre}>
-              <option disabled>select genre</option>
-              <option value="fiction" defaultValue>fiction</option>
-              <option value="non-fiction">non-fiction</option>
+            <select name="select genre" id="genre" className="genre" onChange={this.handleChange} value={bookDetails.genre}>
+              <option disabled>
+                select genre
+              </option>
+              <option value="fiction" defaultValue>
+                fiction
+              </option>
+              <option value="non-fiction">
+                non-fiction
+              </option>
             </select>
             sub-genre
-            <select name="select sub-genre" id="subgenre" className="sub-genre" onChange={this.handleChange} value={this.state.book_details.subgenre}>
-              <option disabled>select subgenre</option>
-              <option defaultValue>NA</option>
-              <option value="sci-fi">sci-fi</option>
-              <option value="fantasy">fantasy</option>
-              <option value="biopic">biopic</option>
-              <option value="romance">romance</option>
-              <option value="young adult">young adult</option>
-              <option value="children's">children's</option>
-              <option value="other">other</option>
-            </select><br/>
-              <input type="submit" value="save" className="savebook_btn"/>
-              <input type="button" value="save and add new" className="addbook_btn"/>
+            <select name="select sub-genre" id="subgenre" className="sub-genre" onChange={this.handleChange} value={bookDetails.subgenre}>
+              <option disabled>
+                select subgenre
+              </option>
+              <option defaultValue>
+                NA
+              </option>
+              <option value="sci-fi">
+                sci-fi
+              </option>
+              <option value="fantasy">
+                fantasy
+              </option>
+              <option value="biopic">
+                biopic
+              </option>
+              <option value="romance">
+                romance
+              </option>
+              <option value="young adult">
+                young adult
+              </option>
+              <option value="children's">
+                children&apos;s
+              </option>
+              <option value="other">
+                other
+              </option>
+            </select>
+            <br />
+            <input type="submit" value="save" className="savebook_btn" />
+            <input type="button" value="save and add new" className="addbook_btn" />
           </form>
         </div>
-      )
+      );
     }
-  }
+}
+
+/** Offers typechecking for the AddEdit component props */
+AddEdit.propTypes = {
+  details: PropTypes.shape().isRequired,
+  isHeader: PropTypes.bool.isRequired,
+  method: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  history: PropTypes.shape().isRequired,
+};
 
 export default withRouter(AddEdit);
