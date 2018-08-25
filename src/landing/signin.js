@@ -12,7 +12,7 @@ import './landing.css';
 
 class SigninForm extends Component {
   static defaultProps = {
-    location: '/',
+    location: '/home',
   }
 
 
@@ -45,9 +45,7 @@ class SigninForm extends Component {
             this.setState({ isAuthenticated: true });
             // console.log("SSS", typeof isAdmin)
           } else if (data.msg.includes('Token has expired')) {
-            localStorage.removeItem('hb_access_token');
-            localStorage.setItem('isAuthenticated', false);
-            localStorage.removeItem('hb_user_role');
+            localStorage.clear();
           } else {
             this.setState({ showAlert: !showAlert, errorMsg: data.msg });
           }
@@ -61,13 +59,12 @@ class SigninForm extends Component {
 
     render() {
       const { location } = this.props;
-      const { from } = location || { from: { pathname: '/home' } };
       const {
         isAuthenticated, showAlert, errorMsg, show,
       } = this.state;
 
       if (isAuthenticated === true) {
-        return <Redirect to={from} />;
+        return <Redirect to={location} />;
       }
 
       return (
