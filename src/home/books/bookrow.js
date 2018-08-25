@@ -49,7 +49,7 @@ class BookRow extends Component {
             </Button> */}
           </td>
 
-          <Modal isOpen={show.edit} toggle={this.toggle}>
+          <Modal isOpen={show.edit} toggle={this.toggle} className="edit_book_modal">
             <ModalHeader toggle={this.toggle}>Edit Book:</ModalHeader>
             <ModalBody>
               <div>{show.edit}</div>
