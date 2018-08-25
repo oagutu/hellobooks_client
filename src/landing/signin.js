@@ -5,10 +5,12 @@ import {
   Modal, ModalBody, ModalHeader, Button, Alert,
 } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 import PropTypes from 'prop-types';
 import SignupForm from './Signup';
 import send from '../Helpers';
 import './landing.css';
+import 'react-notifications/lib/notifications.css';
 
 class SigninForm extends Component {
   static defaultProps = {
@@ -43,7 +45,8 @@ class SigninForm extends Component {
             localStorage.setItem('isAuthenticated', true);
             localStorage.setItem('hb_user_role', data.role);
             this.setState({ isAuthenticated: true });
-            // console.log("SSS", typeof isAdmin)
+            // console.log('login msg: ', data.msg);
+            NotificationManager.success(data.msg, 'login success:');
           } else if (data.msg.includes('Token has expired')) {
             localStorage.clear();
           } else {

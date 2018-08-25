@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
+import { NotificationContainer } from 'react-notifications';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import Navbar from './BaseTemplate';
@@ -30,6 +31,7 @@ const Main = () => (
   <Router>
     <div className="main-container">
       <Navbar />
+      <NotificationContainer />
       <Switch>
         <Route exact path="/" component={App} />
         <PrivateRoute path="/home" component={Home} />

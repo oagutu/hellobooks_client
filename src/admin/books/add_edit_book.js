@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Alert } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 import send from '../../Helpers';
 import '../admin.css';
 
@@ -53,6 +54,7 @@ class AddEdit extends Component {
               errorMessage: data.msg,
             });
             history.push({ pathname: '/home' });
+            NotificationManager.success(data.msg, 'Add/edit book:');
           } else {
             this.setState({
               showAlert: !showAlert,

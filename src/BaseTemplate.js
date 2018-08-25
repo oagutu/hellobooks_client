@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import {
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
 } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 import send from './Helpers';
 import './index.css';
 
@@ -26,11 +27,17 @@ class BaseTemplate extends Component {
   handleLogOut = () => {
     const { history } = this.props;
     send({}, 'POST', '/api/v1/auth/logout')
-      .then(response => (response.status))
-      .then((status) => {
-        if (status === 200 || status === 401) {
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 200 || response.status === 401) {
+          return response.json();
+        } return undefined;
+      })
+      .then((data) => {
+        if (data.message === 'Successfully logged out') {
           localStorage.clear();
           history.push({ pathname: '/' });
+          NotificationManager.info(data.message, 'logout success:');
         }
       });
   };
