@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
+import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import Navbar from './BaseTemplate';
@@ -41,6 +42,15 @@ const Main = () => (
     </div>
   </Router>
 );
+
+PrivateRoute.defaultProps = {
+  location: { pathname: '/home' },
+};
+
+PrivateRoute.propTypes = {
+  location: PropTypes.shape(),
+  component: PropTypes.func.isRequired,
+};
 
 ReactDOM.render(<Main />, document.getElementById('root'));
 registerServiceWorker();
