@@ -56,7 +56,7 @@ class Books extends Component {
 }
 
 Books.propTypes = {
-  books: PropTypes.shape().isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default Books;

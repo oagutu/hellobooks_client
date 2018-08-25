@@ -11,6 +11,11 @@ import send from '../Helpers';
 import './landing.css';
 
 class SigninForm extends Component {
+  static defaultProps = {
+    location: '/',
+  }
+
+
     state = {
       user_details: { username: '', password: '' },
       show: false,
@@ -93,7 +98,7 @@ class SigninForm extends Component {
             <button type="submit" className="sign-in-btn">sign in</button>
           </form>
           <p style={{ margin_top: '15px' }}>
-            Don&apost have an account?<Button onClick={this.toggle} className="signup-btn">Sign Up</Button>
+            Don&apos;t have an account?<Button onClick={this.toggle} className="signup-btn">Sign Up</Button>
           </p>
 
           <Modal isOpen={show} toggle={this.toggle}>
@@ -109,7 +114,7 @@ class SigninForm extends Component {
 }
 
 SigninForm.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.string,
 };
 
 export default SigninForm;
