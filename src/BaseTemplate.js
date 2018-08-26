@@ -81,9 +81,9 @@ class BaseTemplate extends Component {
             <div hidden={!isAdmin}>
               <DropdownItem divider />
               <DropdownItem header>Admin</DropdownItem>
-              <DropdownItem id="add-book"><Link to="/add-book"><i className="fa fa-plus" />Add/Update Book</Link></DropdownItem>
+              <DropdownItem id="add-book"><Link to="/add-book"><i className="fa fa-plus" />Add Book</Link></DropdownItem>
               <DropdownItem id="members"><Link to="/all-members"><i className="fa fa-users" />Members&apos; List</Link></DropdownItem>
-              <DropdownItem id="logs"><Link to="/home"><i className="fa fa-th" />Logs</Link></DropdownItem>
+              <DropdownItem id="logs"><Link to="/action-logs"><i className="fa fa-th" />Logs</Link></DropdownItem>
             </div>
             <DropdownItem divider />
             <DropdownItem onClick={this.handleLogOut}><i className="fa fa-power-off" />Logout</DropdownItem>

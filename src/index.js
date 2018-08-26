@@ -12,6 +12,7 @@ import App from './landing/index';
 import Home from './home/index';
 import Add from './admin/books/add_book';
 import Members from './admin/members/members';
+import Logs from './admin/logs/logs';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -38,6 +39,7 @@ const Main = () => (
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/add-book" component={Add} />
         <PrivateRoute path="/all-members" component={Members} />
+        <PrivateRoute path="/action-logs" component={Logs} />
       </Switch>
     </div>
   </Router>
