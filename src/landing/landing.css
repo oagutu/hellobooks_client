@@ -1,0 +1,117 @@
+#root {height: 100%;}
+
+.Landing {height: 100%; }
+
+/* sign in */
+
+.login-main {
+  height: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.login-row {
+  margin: 0;
+  height: 100%;
+}
+
+.login-left {
+  background: tomato;
+  padding: 0;
+}
+
+.login-pg-text {
+  width: 50%;
+  color: white;
+  position: relative;
+  top: 30%;
+}
+
+.login-right {
+  padding: 0;
+}
+
+.login-container {
+  width: 50%;
+  position: relative;
+  top: 30%;
+}
+
+.login-container >p {
+  margin-top: 15px;
+}
+
+.login-form fieldset>input {
+  width: 100%;
+  border: 0;
+  border-bottom: tomato solid 1px;
+}
+
+.sign-in-btn {
+  border: tomato solid 2px;
+  background: white;
+  color: tomato;
+  border-radius: 10px;
+  padding: 5px 13px;
+}
+
+/* Signin */
+
+/* Signup */
+.signup-btn {
+  background-color: transparent;
+  color:black;
+  text-decoration-line: underline;
+  border: 0px;
+  font-size:13px;
+}
+
+.modal-title {
+  color:tomato;
+}
+
+.signup-form >fieldset >input {
+  margin: 7px;
+  width: 100%;
+  border: 0;
+  border-bottom: tomato solid 1px;
+}
+
+.sign-up-btn {
+  background: black;
+  color: white;
+  padding: 5px 15px;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.sign-up-btn:hover{color:tomato;}
+
+/* signup */
+
+
+@media (max-width:770px) {
+  .signin-left {
+      visibility: hidden;
+      height: 0;
+  }
+  .login-main {height: auto;}
+
+  .login-container {
+      position: relative;
+      top: 30px;
+  }
+  .login-form {
+    font-size:9px;
+  }
+  .signup-pg-text{
+      width:100%;
+      text-align: center;
+  }
+  .signup-left{
+      padding-bottom: 110px;
+  }
+
+}
+

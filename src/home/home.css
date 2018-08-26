@@ -1,0 +1,12 @@
+.delete_book_modal .modal-content .modal-body >div >p >span {
+    color:tomato;
+    text-decoration: underline;
+}
+
+.confirm-delete {
+    float: right;
+}
+
+.confirm-delete >button {
+    margin: auto 4px; 
+}
