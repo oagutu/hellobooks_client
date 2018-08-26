@@ -4,8 +4,11 @@ import React, { Component } from 'react';
 import {
   Button, Modal, ModalBody, ModalHeader,
 } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 import PropTypes from 'prop-types';
 import AddEdit from '../../admin/books/add_edit_book';
+import send from '../../Helpers';
 import '../home.css';
 
 
@@ -18,10 +21,32 @@ class BookRow extends Component {
       method: 'PUT',
     }
 
-    toggle = () => {
+    /** Delete single book entry */
+    handleDelete = () => {
+      const { value, history, title } = this.props;
+      const { path } = this.state;
+      send({}, 'DELETE', path + String(value))
+        .then((response) => {
+          if (response.status === 204) {
+            history.push({ pathname: '/home' });
+            NotificationManager.info(`Successfully deleted: ${title}`, 'Delete Book');
+          }
+        });
+    }
+
+    /** Toggle state of edit or delete book modals to determine it's visibility to the user */
+    toggle = (e) => {
+      const { id } = e.target;
       let { show } = this.state;
       show = Object.assign({}, show);
-      show.edit = !show.edit;
+      if (id === 'edit' && show.edit === false) {
+        show.edit = !show.edit;
+      } else if (id === 'delete' && show.delete === false) {
+        show.delete = !show.delete;
+      } else {
+        show.edit = false;
+        show.delete = false;
+      }
       this.setState({ show });
     }
 
@@ -42,11 +67,11 @@ class BookRow extends Component {
           <td value={synopsis}>{synopsis}</td>
           <td value="actions">
             <Button onClick={this.toggle} className="edit-book-btn" hidden={!isAdmin}>
-              <i className="fa fa-edit" />
+              <i className="fa fa-edit" id="edit" />
             </Button>
-            {/* <Button onClick={this.toggle} className="delete-book-btn">
-              <i className="fa fa-trash" />
-            </Button> */}
+            <Button onClick={this.toggle} className="delete-book-btn" hidden={!isAdmin}>
+              <i className="fa fa-trash" id="delete" />
+            </Button>
           </td>
 
           <Modal isOpen={show.edit} toggle={this.toggle} className="edit_book_modal">
@@ -59,6 +84,24 @@ class BookRow extends Component {
                 path={path + String(value)}
                 method={method}
               />
+            </ModalBody>
+          </Modal>
+          <Modal isOpen={show.delete} toggle={this.toggle} className="delete_book_modal">
+            <ModalHeader toggle={this.toggle}>Delete Book:</ModalHeader>
+            <ModalBody>
+              <div>
+                <p> Are you sure you want to delete
+                  <span> { title } ?</span>
+                </p>
+              </div>
+              <div className="confirm-delete">
+                <Button
+                  onClick={this.handleDelete}
+                  style={{ backgroundColor: 'red' }}
+                >
+                  Delete
+                </Button>
+              </div>
             </ModalBody>
           </Modal>
         </tr>
@@ -75,6 +118,7 @@ BookRow.propTypes = {
   sub_genre: PropTypes.string.isRequired,
   synopsis: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
-export default BookRow;
+export default withRouter(BookRow);

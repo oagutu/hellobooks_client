@@ -28,7 +28,6 @@ class BaseTemplate extends Component {
     const { history } = this.props;
     send({}, 'POST', '/api/v1/auth/logout')
       .then((response) => {
-        console.log(response.status);
         if (response.status === 200 || response.status === 401) {
           return response.json();
         } return undefined;

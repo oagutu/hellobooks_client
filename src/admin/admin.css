@@ -1,3 +1,16 @@
 .modal-body .body-sec {
     margin-top: 0px;
 }
+
+.edit-book-btn, .delete-book-btn {
+    background-color: inherit;
+    color: tomato;
+    padding: 0.5px 3px;
+    border-color: transparent;
+    margin:1px 2px;
+}
+.edit-book-btn:hover, .delete-book-btn:hover {
+    background-color:tomato;
+    color: white;
+    border-color: transparent;
+}
