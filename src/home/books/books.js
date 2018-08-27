@@ -21,6 +21,7 @@ class Books extends Component {
 
       return (
         <div className="container body-sec">
+          <h3 className="library-table">Library</h3>
           <Table className="books-table">
             <thead>
               <tr>
