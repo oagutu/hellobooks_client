@@ -18,3 +18,8 @@
     color: white;
     border-color: transparent;
 }
+
+.modal-content .modal-body >div >p >span {
+    color:tomato;
+    text-decoration: underline;
+}

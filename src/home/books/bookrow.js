@@ -16,7 +16,7 @@ import '../home.css';
 class BookRow extends Component {
     state = {
       tooltipOpen: { edit: false, delete: false, borrow: false },
-      show: { edit: false, delete: false, borrow: false },
+      show: { edit: false, deleteModal: false, borrow: false },
       path: '/api/v1/books/',
       path_borrow: '/api/v1/users/books/',
       method: 'PUT',
@@ -24,25 +24,32 @@ class BookRow extends Component {
 
     /** Borrow single book */
     handleBorrow = () => {
-      const { value, history, title } = this.props;
+      const { value, title, history } = this.props;
       const { path_borrow } = this.state;
+      let { show } = this.state;
+      show = Object.assign({}, show);
       send({}, 'POST', path_borrow + String(value))
         .then(response => (response.json()))
         .then((data) => {
           const msg = data.msg ? data.msg : `Successfully borrowed: ${title}. Return Date: ${data.due_date}`;
           history.push({ pathname: '/home' });
+          show.borrow = !show.borrow;
+          this.setState({ show });
           NotificationManager.info(msg, 'Borrow Book');
         });
     }
 
     /** Delete single book entry */
     handleDelete = () => {
-      const { value, history, title } = this.props;
+      const { value, title } = this.props;
       const { path } = this.state;
+      let { show } = this.state;
+      show = Object.assign({}, show);
       send({}, 'DELETE', path + String(value))
         .then((response) => {
           if (response.status === 204) {
-            history.push({ pathname: '/home' });
+            show.deleteModal = !show.deleteModal;
+            this.setState({ show });
             NotificationManager.info(`Successfully deleted: ${title}`, 'Delete Book');
           }
         });
@@ -70,13 +77,13 @@ class BookRow extends Component {
       show = Object.assign({}, show);
       if (id.includes('edit') && show.edit === false) {
         show.edit = !show.edit;
-      } else if (id.includes('delete') && show.delete === false) {
-        show.delete = !show.delete;
+      } else if (id.includes('delete') && show.deleteModal === false) {
+        show.deleteModal = !show.deleteModal;
       } else if (id.includes('borrow') && show.borrow === false) {
         show.borrow = !show.borrow;
       } else {
         show.edit = false;
-        show.delete = false;
+        show.deleteModal = false;
         show.borrow = false;
       }
       this.setState({ show });
@@ -140,7 +147,7 @@ class BookRow extends Component {
           </Modal>
 
           {/* Delete book modal */}
-          <Modal isOpen={show.delete} toggle={this.toggle} className="delete_book_modal">
+          <Modal isOpen={show.deleteModal} toggle={this.toggle} className="delete_book_modal">
             <ModalHeader toggle={this.toggle}>Delete Book:</ModalHeader>
             <ModalBody>
               <div>
