@@ -9,7 +9,7 @@ import './home.css';
 
 
 class Home extends Component {
-  state = { results: {}, path: '/api/v1/books?results=3' }
+  state = { results: {}, path: '/api/v1/books?results=3', isSearch: false }
 
   componentDidMount = () => {
     const { history } = this.props;
@@ -17,6 +17,7 @@ class Home extends Component {
     this.get_books(history, path);
   }
 
+  /** Get books based on specified path */
   get_books = (history, path) => {
     send({}, 'GET', path)
       .then(response => (response.json()))
@@ -43,9 +44,18 @@ class Home extends Component {
     }
   }
 
+  /** Continually search for books as long as there's user input */
+  handleChange = (e) => {
+    const { value } = e.target;
+    const { history } = this.props;
+    if (!['undefined', ''].includes(value)) {
+      this.get_books(history, `/api/v1/books/search?q=${value}`);
+      this.setState({ isSearch: true });
+    }
+  }
+
   render() {
-    const { results } = this.state;
-    console.log('results: ', results);
+    const { results, isSearch } = this.state;
     const page_list = Array.from({ length: results.pages }, (v, k) => k + 1);
 
     return (
@@ -55,8 +65,9 @@ class Home extends Component {
           page_list={page_list}
           handlePagination={this.handlePagination}
           isNotNext={results.pages === results.current_page}
-          isNotPrev={results.current_page === 1}
+          isNotPrev={results.current_page === 1 || isSearch}
           current={results.current_page}
+          handleChange={this.handleChange}
         />
         <div className="container tot-pages">
           <div className="row">

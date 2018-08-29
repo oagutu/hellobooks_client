@@ -24,6 +24,13 @@
     text-decoration: underline;
 }
 
+.search-form>input {
+    border: 1px solid tomato;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 3px;
+}
+
 .page-item >button {
     padding: 2px 4px;
     border-radius: 0px;
@@ -50,7 +57,7 @@
 }
 
 .tot-pages .row .col-sm-4 {
-    font-size: 12px;
+    font-size: 9px;
     border-top: 1px solid tomato;
     border-bottom: 1px solid tomato;
     padding: 4px;
@@ -59,10 +66,9 @@
 .tot-pages .row .col-sm-4 >span {
     color: tomato;
     text-decoration: underline;
-    font-size: 13px;
+    font-size: 10px;
     padding: 1px;
 }
-
 
 .genre, .sub_genre {
     text-align: center;

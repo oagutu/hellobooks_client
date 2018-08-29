@@ -19,15 +19,19 @@ class Books extends Component {
 
     render() {
       const {
-        books, page_list, handlePagination, isNotNext, isNotPrev, current_page,
+        books, page_list, handlePagination, isNotNext, isNotPrev, handleChange,
       } = this.props;
       const { isAdmin } = this.state;
-      console.log(isAdmin)
 
       return (
         <div className="container body-sec">
           <h3 className="library-table">Library</h3>
           <div className="table-ctrl">
+            <form className="search-form">
+              <input type="text" placeholder="search author/title" onChange={handleChange} />
+              {/* <Button type="submit" className="search-book fa fa-search" /> */}
+            </form>
+
             {/* Page element consisting of buttons that load corresponding results */}
             <Pagination className="pages-books">
               <PaginationItem hidden={isNotPrev}>
@@ -93,7 +97,8 @@ Books.propTypes = {
   handlePagination: PropTypes.func.isRequired,
   isNotNext: PropTypes.bool.isRequired,
   isNotPrev: PropTypes.bool.isRequired,
-  current_page: PropTypes.number.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  // current_page: PropTypes.number.isRequired,
 };
 
 export default Books;
