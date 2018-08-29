@@ -107,8 +107,8 @@ class BookRow extends Component {
           <td value={title}>{title}</td>
           <td value={author}>{author}</td>
           <td value={book_code}>{book_code}</td>
-          <td value={genre}>{genre}</td>
-          <td value={sub_genre}>{sub_genre}</td>
+          <td value={genre} className="genre">{genre}</td>
+          <td value={sub_genre} className="sub_genre">{sub_genre}</td>
           <td value={synopsis}>{synopsis}</td>
           <td value="actions">
             <Button onClick={this.toggle} className="edit-book-btn" hidden={!isAdmin}>
@@ -185,6 +185,19 @@ class BookRow extends Component {
               </div>
             </ModalBody>
           </Modal>
+
+          {/* Show more book details */}
+          <Modal isOpen={show.deleteModal} toggle={this.toggle} className="show_book_details_modal">
+            <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
+            <ModalBody>
+              <div>
+                <p>
+                  {synopsis}
+                </p>
+              </div>
+            </ModalBody>
+          </Modal>
+
         </tr>
       );
     }

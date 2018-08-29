@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'reactstrap';
+import {
+  Table, Pagination, PaginationItem, Button,
+} from 'reactstrap';
 import BookRow from './bookrow';
 import '../home.css';
 
@@ -16,13 +18,37 @@ class Books extends Component {
     }
 
     render() {
-      const { books } = this.props;
+      const {
+        books, page_list, handlePagination, isNotNext, isNotPrev, current_page,
+      } = this.props;
       const { isAdmin } = this.state;
+      console.log(isAdmin)
 
       return (
         <div className="container body-sec">
           <h3 className="library-table">Library</h3>
-          <Table className="books-table">
+          <div className="table-ctrl">
+            {/* Page element consisting of buttons that load corresponding results */}
+            <Pagination className="pages-books">
+              <PaginationItem hidden={isNotPrev}>
+                <Button onClick={handlePagination} id="prev"><i className="fa fa-angle-left" /> prev</Button>
+              </PaginationItem>
+              {
+                page_list.map(
+                  pg => (
+                    <PaginationItem key={pg}>
+                      <Button onClick={handlePagination} id={pg}>{pg}</Button>
+                    </PaginationItem>
+                  ),
+                )
+              }
+              <PaginationItem hidden={isNotNext}>
+                <Button onClick={handlePagination} id="next">next <i className="fa fa-angle-right" /></Button>
+              </PaginationItem>
+            </Pagination>
+          </div>
+          {/* Main table elements holding all books and correpsonding details */}
+          <Table className="books-table" id="books-table">
             <thead>
               <tr>
                 <th>#</th>
@@ -36,6 +62,7 @@ class Books extends Component {
               </tr>
             </thead>
             <tbody>
+              {/* map the array holding all returned books to an individual table row component */}
               {books.map(m => (
                 <BookRow
                   key={m.book_id}
@@ -56,8 +83,17 @@ class Books extends Component {
     }
 }
 
+Books.defaultProps = {
+  books: [],
+};
+
 Books.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape()),
+  page_list: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  handlePagination: PropTypes.func.isRequired,
+  isNotNext: PropTypes.bool.isRequired,
+  isNotPrev: PropTypes.bool.isRequired,
+  current_page: PropTypes.number.isRequired,
 };
 
 export default Books;
