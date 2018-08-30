@@ -13,6 +13,7 @@ import Home from './home/index';
 import Add from './admin/books/add_book';
 import Members from './admin/members/members';
 import Logs from './admin/logs/logs';
+import History from './history/history';
 import registerServiceWorker from './registerServiceWorker';
 
 
@@ -37,6 +38,7 @@ const Main = () => (
       <Switch>
         <Route exact path="/" component={App} />
         <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/borrow-history" component={History} />
         <PrivateRoute path="/add-book" component={Add} />
         <PrivateRoute path="/all-members" component={Members} />
         <PrivateRoute path="/action-logs" component={Logs} />

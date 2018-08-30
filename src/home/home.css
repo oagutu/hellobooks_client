@@ -1,12 +1,75 @@
-.delete_book_modal .modal-content .modal-body >div >p >span {
+
+.tooltip {
+    font-size: 9px;
+    padding: 3px;
+    color: tomato;
+    background: transparent;
+}
+
+.borrow-book-btn{
+    background-color: inherit;
+    color: tomato;
+    padding: 0.5px 3px;
+    border-color: transparent;
+    margin:1px 2px;
+}
+.borrow-book-btn:hover {
+    background-color:tomato;
+    color: white;
+    border-color: transparent;
+}
+
+.modal-content .modal-body >div >p >span {
     color:tomato;
     text-decoration: underline;
 }
 
-.confirm-delete {
+.search-form>input {
+    border: 1px solid tomato;
+    border-radius: 5px;
+    font-size: 12px;
+    padding: 3px;
+}
+
+.page-item >button {
+    padding: 2px 4px;
+    border-radius: 0px;
+    background: inherit;
+    color: tomato;
+    border: 1px solid tomato;
+    font-size: 11px;
+}
+
+.pages-books {
     float: right;
 }
 
-.confirm-delete >button {
-    margin: auto 4px; 
+.books-table>thead>tr>th{
+    text-align: center;
+}
+
+.books-table >tbody>tr>td {
+    font-size: 11px;
+}
+
+.tot-pages {
+    padding: 5px;
+}
+
+.tot-pages .row .col-sm-4 {
+    font-size: 9px;
+    border-top: 1px solid tomato;
+    border-bottom: 1px solid tomato;
+    padding: 4px;
+    text-align: center;
+}
+.tot-pages .row .col-sm-4 >span {
+    color: tomato;
+    text-decoration: underline;
+    font-size: 10px;
+    padding: 1px;
+}
+
+.genre, .sub_genre {
+    text-align: center;
 }
