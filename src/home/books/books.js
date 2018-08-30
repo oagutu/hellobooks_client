@@ -28,8 +28,7 @@ class Books extends Component {
           <h3 className="library-table">Library</h3>
           <div className="table-ctrl">
             <form className="search-form">
-              <input type="text" placeholder="search author/title" onChange={handleChange} />
-              {/* <Button type="submit" className="search-book fa fa-search" /> */}
+              <input type="text" placeholder="&#xF002; search author/title" onChange={handleChange} style={{ fontFamily: 'Arial, FontAwesome' }} />
             </form>
 
             {/* Page element consisting of buttons that load corresponding results */}
