@@ -178,7 +178,7 @@ class BookRow extends Component {
               <div className="confirm-borrow">
                 <Button
                   onClick={this.handleBorrow}
-                  style={{ backgroundColor: 'blue' }}
+                  style={{ backgroundColor: 'blue', float: 'right' }}
                 >
                   Borrow
                 </Button>
@@ -187,7 +187,7 @@ class BookRow extends Component {
           </Modal>
 
           {/* Show more book details */}
-          <Modal isOpen={show.deleteModal} toggle={this.toggle} className="show_book_details_modal">
+          <Modal isOpen={show.moreDetailsModal} toggle={this.toggle} className="show_book_details_modal">
             <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
             <ModalBody>
               <div>
