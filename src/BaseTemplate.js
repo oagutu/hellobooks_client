@@ -14,13 +14,15 @@ class BaseTemplate extends Component {
   state = {
     dropdownOpen: false,
     isAdmin: false,
+    user: null,
   }
 
   componentDidMount = () => {
     // Set role of logged in user ie. if they are an admin or not
     const role = localStorage.getItem('hb_user_role');
+    const user = localStorage.getItem('user');
     const isAdmin = role === 'admin';
-    this.setState({ isAdmin });
+    this.setState({ isAdmin, user });
   }
 
   /** Log out already logged in user. */
@@ -49,7 +51,7 @@ class BaseTemplate extends Component {
 
   /** Renders navbar based on whether a user is logged in or not. */
   render() {
-    const { dropdownOpen, isAdmin } = this.state;
+    const { dropdownOpen, isAdmin, user } = this.state;
 
     if (!localStorage.getItem('isAuthenticated')) {
       return (
@@ -72,7 +74,7 @@ class BaseTemplate extends Component {
 
         <Dropdown isOpen={dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            <i className="fa fa-user-circle-o" />
+            <span className="user-id-nav">{user}</span> <i className="fa fa-user-circle-o" />
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem id="prof-btn"><Link to="/profile"><i className="fa fa-user" />Profile</Link></DropdownItem>

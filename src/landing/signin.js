@@ -44,6 +44,7 @@ class SigninForm extends Component {
             localStorage.setItem('hb_access_token', data.access_token);
             localStorage.setItem('isAuthenticated', true);
             localStorage.setItem('hb_user_role', data.role);
+            localStorage.setItem('user', data.user);
             this.setState({ isAuthenticated: true });
             // console.log('login msg: ', data.msg);
             NotificationManager.success(data.msg, 'login success:');
