@@ -23,6 +23,7 @@ class AddEdit extends Component {
       }
     }
 
+    /** Update state based on user actions in input fields */
     handleChange = (e) => {
       const { id } = e.target;
       let { bookDetails } = this.state;
@@ -32,6 +33,7 @@ class AddEdit extends Component {
       // console.log(bookDetails);
     }
 
+    /** Submit added book data to api endpoint and process response */
     handleSubmit = (e) => {
       e.preventDefault();
       this.setState({ showAlert: false });
@@ -141,7 +143,6 @@ class AddEdit extends Component {
             </select>
             <br />
             <input type="submit" value="save" className="savebook_btn" />
-            <input type="button" value="save and add new" className="addbook_btn" />
           </form>
         </div>
       );
