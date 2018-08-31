@@ -22,17 +22,23 @@ class BorrowHistory extends Component {
 
   /** Return single book. */
   handleReturn = () => {
-    const { book_id, title, history } = this.props;
+    const {
+      book_id, title, history, updateStateOnReturn,
+    } = this.props;
     const { path } = this.state;
     // Access return book endpoint.
     send({}, 'PUT', path + String(book_id))
       .then(response => (response.json()))
       .then((data) => {
         const msg = data.msg ? data.msg : `Successfully returned: ${title}`;
+        // Update borrowed books table component according to book returned.
+        updateStateOnReturn(data);
+
         // Toggle return modal off.
-        let { returnOpen } = this.state;
+        let { returnOpen, isReturned } = this.state;
         returnOpen = !returnOpen;
-        this.setState({ returnOpen });
+        isReturned = !isReturned;
+        this.setState({ returnOpen, isReturned });
         history.push({ pathname: '/borrow-history' });
         NotificationManager.info(msg, 'Return Book');
       });
@@ -64,7 +70,7 @@ class BorrowHistory extends Component {
           <Button onClick={this.toggle}>return</Button>
         </td>
         {/* Return borrowed book modal */}
-        <Modal isOpen={returnOpen} toggle={this.toggle} className="edit_book_modal">
+        <Modal isOpen={returnOpen} toggle={this.toggle} className="return_book_modal">
           <ModalHeader toggle={this.toggle}>Return Book:</ModalHeader>
           <ModalBody>
             <div>
@@ -75,7 +81,7 @@ class BorrowHistory extends Component {
             <div className="confirm-return">
               <Button
                 onClick={this.handleReturn}
-                style={{ backgroundColor: 'green' }}
+                style={{ backgroundColor: 'green', float: 'right' }}
               >
                 Return
               </Button>
@@ -103,6 +109,7 @@ BorrowHistory.propTypes = {
   fee_owed: PropTypes.number,
   status: PropTypes.string.isRequired,
   history: PropTypes.shape().isRequired,
+  updateStateOnReturn: PropTypes.func.isRequired,
 };
 
 export default withRouter(BorrowHistory);

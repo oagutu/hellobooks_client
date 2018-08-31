@@ -6,7 +6,7 @@ import './history.css';
 
 
 const BorrowHistory = (props) => {
-  const { borrow_details } = props;
+  const { borrow_details, updateStateOnReturn } = props;
   return (
     <div className="container body-sec">
       <h3 className="library-table">Borrowed Books:</h3>
@@ -34,6 +34,7 @@ const BorrowHistory = (props) => {
               return_date={m.return_date}
               fee_owed={m.fee_owed}
               status={m.status}
+              updateStateOnReturn={updateStateOnReturn}
             />))}
         </tbody>
       </Table>
@@ -43,6 +44,7 @@ const BorrowHistory = (props) => {
 
 BorrowHistory.propTypes = {
   borrow_details: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  updateStateOnReturn: PropTypes.func.isRequired,
 };
 
 export default BorrowHistory;

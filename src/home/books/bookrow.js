@@ -32,7 +32,7 @@ class BookRow extends Component {
         .then(response => (response.json()))
         .then((data) => {
           const msg = data.msg ? data.msg : `Successfully borrowed: ${title}. Return Date: ${data.due_date}`;
-          history.push({ pathname: '/home' });
+          history.push({ pathname: '/borrow-history' });
           show.borrow = !show.borrow;
           this.setState({ show });
           NotificationManager.info(msg, 'Borrow Book');
@@ -152,13 +152,14 @@ class BookRow extends Component {
             <ModalBody>
               <div>
                 <p> Are you sure you want to delete
-                  <span> { title } ?</span>
+                  <span> { title }</span>?
+                  <p>Author: <span> { author } </span></p>
                 </p>
               </div>
               <div className="confirm-delete">
                 <Button
                   onClick={this.handleDelete}
-                  style={{ backgroundColor: 'red' }}
+                  style={{ backgroundColor: '#d9534f' }}
                 >
                   Delete
                 </Button>
@@ -178,7 +179,7 @@ class BookRow extends Component {
               <div className="confirm-borrow">
                 <Button
                   onClick={this.handleBorrow}
-                  style={{ backgroundColor: 'blue', float: 'right' }}
+                  style={{ backgroundColor: '#337ab7', float: 'right' }}
                 >
                   Borrow
                 </Button>

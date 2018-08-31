@@ -21,13 +21,27 @@ class Home extends Component {
       });
   }
 
+  /** Update borrowed book component based on returned book. */
+  updateStateOnReturn = (data) => {
+    const { borrow_details } = this.state;
+    // Get index of returned book in this.state.borrow_details and update the element at said index.
+    let returned_book = borrow_details.filter(detail => detail.borrow_id === data.borrow_id)[0];
+    returned_book = Object.assign(returned_book,
+      { return_date: data.return_date, fee_owed: data.fee_owed, status: data.status });
+    const index_returned = borrow_details.indexOf(returned_book);
+    borrow_details[index_returned] = returned_book;
+    this.setState({ borrow_details });
+  }
+
   render() {
     const { borrow_details } = this.state;
-    console.log(borrow_details);
 
     return (
       <div>
-        <BorrowHistory borrow_details={borrow_details} />
+        <BorrowHistory
+          borrow_details={borrow_details}
+          updateStateOnReturn={this.updateStateOnReturn}
+        />
       </div>
     );
   }
