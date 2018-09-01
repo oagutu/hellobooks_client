@@ -4,12 +4,13 @@ import { Table } from 'reactstrap';
 import BorrowRow from './borrow-row';
 import './history.css';
 
-
+/** Borrow history main component.
+ * Displays table with either returned or unreturned books.
+ */
 const BorrowHistory = (props) => {
   const { borrow_details, updateStateOnReturn } = props;
   return (
-    <div className="container body-sec">
-      <h3 className="library-table">Borrowed Books:</h3>
+    <div className="container">
       <Table className="books-table">
         <thead>
           <tr>
@@ -23,6 +24,7 @@ const BorrowHistory = (props) => {
           </tr>
         </thead>
         <tbody>
+          {/* Map each borrow details array aelement to individual borrowed row component */}
           {borrow_details.map(m => (
             <BorrowRow
               key={m.borrow_id}

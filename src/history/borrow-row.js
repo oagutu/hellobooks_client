@@ -64,8 +64,8 @@ class BorrowHistory extends Component {
         <td value={borrow_date}>{borrow_date}</td>
         <td value={due_date}>{due_date}</td>
         <td value={return_date}>{return_date}</td>
-        <td value={fee_owed}>{fee_owed}</td>
-        <td value={status}>{status}</td>
+        <td value={fee_owed} className="fee-cell">{fee_owed}</td>
+        <td value={status} className="status-cell">{status}</td>
         <td hidden={isReturned}>
           <Button onClick={this.toggle}>return</Button>
         </td>

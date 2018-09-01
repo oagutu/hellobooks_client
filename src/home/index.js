@@ -56,7 +56,6 @@ class Home extends Component {
   render() {
     const { results, isSearch } = this.state;
     const page_list = Array.from({ length: results.pages }, (v, k) => k + 1);
-    console.log('checking props ', this.props);
 
     return (
       <div>

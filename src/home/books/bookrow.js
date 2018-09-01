@@ -22,7 +22,9 @@ class BookRow extends Component {
       method: 'PUT',
     }
 
-    /** Borrow single book */
+    /** Borrow single book
+     * @memberof BookRow
+     */
     handleBorrow = () => {
       const { value, title, history } = this.props;
       const { path_borrow } = this.state;
@@ -39,7 +41,9 @@ class BookRow extends Component {
         });
     }
 
-    /** Delete single book entry */
+    /** Delete single book entry
+     * @memberof BookRow
+     */
     handleDelete = () => {
       const { value, title } = this.props;
       const { path } = this.state;

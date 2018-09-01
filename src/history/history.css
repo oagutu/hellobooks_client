@@ -1,0 +1,14 @@
+.nav-tabs .nav-item>a{
+    padding: 3px;
+    font-size: 12px;
+}
+
+.nav-tabs .nav-item> .active {
+    border-width: 3px;
+    border-left: 5px solid tomato;
+    color: tomato;
+}
+
+.fee-cell, .status-cell {
+    text-align: center;
+}
