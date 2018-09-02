@@ -48,7 +48,7 @@ class SigninForm extends Component {
     /**
      * Submit registered user details to api for user login.
      *
-     * @memberof SignuinForm
+     * @memberof SigninForm
      * @param {object} e User input event
      */
     handleSubmit = (e) => {
