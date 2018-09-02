@@ -51,18 +51,18 @@ class EditUserForm extends Component {
         <Alert isOpen={showAlert} color="warning">
           {errorMsg}
         </Alert>
-        name:<br />
+        <span>name:</span><br />
         <input type="text" value={name} readOnly /><br />
-        username:<br />
+        <span>username:</span><br />
         <input type="text" value={username} readOnly /><br />
-        email:<br />
+        <span>email:</span><br />
         <input type="text" value={email} readOnly /><br />
-        old password:<br />
-        <input type="password" onChange={this.handlechange} id="current_password" /><br />
-        new Password:<br />
-        <input type="password" onChange={this.handlechange} id="new_password" /><br />
-        confirm password<br />
-        <input type="password" onChange={this.handlechange} id="confirm_password" /><br />
+        <span><span className="required">*</span>old password:</span><br />
+        <input type="password" onChange={this.handlechange} id="current_password" required /><br />
+        <span><span className="required">*</span>new Password:</span><br />
+        <input type="password" onChange={this.handlechange} id="new_password" required /><br />
+        <span><span className="required">*</span>confirm password:</span><br />
+        <input type="password" onChange={this.handlechange} id="confirm_password" required /><br />
         <Button type="submit">Edit</Button>
 
       </form>
