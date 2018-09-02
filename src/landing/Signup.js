@@ -6,6 +6,12 @@ import { NotificationManager } from 'react-notifications';
 import send from '../Helpers';
 import './landing.css';
 
+/**
+ * New User Sign up form component
+ *
+ * @class SignupForm
+ * @extends {Component}
+ */
 class SignupForm extends Component {
     state = {
       user_details: {
@@ -17,6 +23,12 @@ class SignupForm extends Component {
 
     }
 
+    /**
+     * Update component state based on user input.
+     *
+     * @memberof SignupForm
+     * @param {object} e (user input event)
+     */
     handleChange = (e) => {
       const { id, value } = e.target;
       let { user_details } = this.state;
@@ -25,6 +37,12 @@ class SignupForm extends Component {
       this.setState({ user_details });
     }
 
+    /**
+     * Submit new user details to api for user registration.
+     *
+     * @memberof SignupForm
+     * @param {object} e User input event
+     */
     handleSubmit = (e) => {
       e.preventDefault();
       const { toggle } = this.props;
@@ -42,6 +60,12 @@ class SignupForm extends Component {
         });
     }
 
+    /**
+     * Display new user sign up form.
+     *
+     * @returns {object} HTML div element
+     * @memberof SignupForm
+     */
     render() {
       const { showAlert, errorMessage } = this.state;
       return (

@@ -2,6 +2,7 @@ import React from 'react';
 import SigninForm from './signin';
 import './landing.css';
 
+/** Main landing page component */
 const App = () => (
   <div className="Landing">
     <div className="container login-main">

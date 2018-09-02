@@ -12,6 +12,12 @@ import send from '../Helpers';
 import './landing.css';
 import 'react-notifications/lib/notifications.css';
 
+/**
+ * Registered user sign in component.
+ *
+ * @class SigninForm
+ * @extends {Component}
+ */
 class SigninForm extends Component {
   static defaultProps = {
     location: '/home',
@@ -25,6 +31,12 @@ class SigninForm extends Component {
       errorMsg: '',
     }
 
+    /**
+     * Update component state based on user input.
+     *
+     * @memberof SigninForm
+     * @param {object} e (user input event)
+     */
     handleChange = (e) => {
       const { id, value } = e.target;
       const { user_details } = this.state;
@@ -33,6 +45,12 @@ class SigninForm extends Component {
       this.setState({ user_details: param });
     };
 
+    /**
+     * Submit registered user details to api for user login.
+     *
+     * @memberof SignuinForm
+     * @param {object} e User input event
+     */
     handleSubmit = (e) => {
       e.preventDefault();
       const { user_details, showAlert } = this.state;
@@ -55,11 +73,22 @@ class SigninForm extends Component {
         });
     };
 
+    /**
+     * Toggle the state/vivsibility of the signup form modal.
+     *
+     * @memberof SigninForm
+     */
     toggle = () => {
       const { show } = this.state;
       this.setState({ show: !show });
     }
 
+    /**
+     * Display they signin form
+     *
+     * @returns {object} HTML div element
+     * @memberof SigninForm
+     */
     render() {
       const { location } = this.props;
       const {
