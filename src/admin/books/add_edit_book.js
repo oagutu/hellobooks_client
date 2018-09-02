@@ -9,7 +9,7 @@ import '../admin.css';
 class AddEdit extends Component {
     state = {
       bookDetails: {
-        title: '', author: '', book_code: 0, ddc_code: '', synopsis: '', genre: '', subgenre: '',
+        title: '', author: '', book_code: Number(), ddc_code: '', synopsis: '', genre: '', subgenre: 'NA',
       },
       showAlert: false,
       errorMessage: '',
@@ -23,6 +23,7 @@ class AddEdit extends Component {
       }
     }
 
+    /** Update state based on user actions in input fields */
     handleChange = (e) => {
       const { id } = e.target;
       let { bookDetails } = this.state;
@@ -32,6 +33,7 @@ class AddEdit extends Component {
       // console.log(bookDetails);
     }
 
+    /** Submit added book data to api endpoint and process response */
     handleSubmit = (e) => {
       e.preventDefault();
       this.setState({ showAlert: false });
@@ -141,17 +143,21 @@ class AddEdit extends Component {
             </select>
             <br />
             <input type="submit" value="save" className="savebook_btn" />
-            <input type="button" value="save and add new" className="addbook_btn" />
           </form>
         </div>
       );
     }
 }
 
+AddEdit.defaultProps = {
+  isHeader: false,
+  details: {},
+};
+
 /** Offers typechecking for the AddEdit component props */
 AddEdit.propTypes = {
-  details: PropTypes.shape().isRequired,
-  isHeader: PropTypes.bool.isRequired,
+  details: PropTypes.shape(),
+  isHeader: PropTypes.bool,
   method: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   history: PropTypes.shape().isRequired,

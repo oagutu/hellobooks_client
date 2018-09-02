@@ -1,7 +1,6 @@
 /** Main home component */
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import send, { sessionExpire } from '../Helpers';
 import Books from './books/books';
@@ -91,4 +90,4 @@ Home.propTypes = {
   history: PropTypes.shape().isRequired,
 };
 
-export default withRouter(Home);
+export default Home;

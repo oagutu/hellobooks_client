@@ -283,28 +283,16 @@ updatebook-sec {
     cursor: pointer;
     font-size: 15px;
 }
-.savebook_btn,
-.addbook_btn,
-.deletebook_btn {
+.savebook_btn {
     border-radius: 10px;
     border: none;
-}
-.savebook_btn:hover,
-.addbook_btn:hover,
-.deletebook_btn:hover {
-    cursor: pointer;
-    font-size: 18px;
-}
-.savebook_btn:hover{
-    color:tomato;
-}
-.addbook_btn{
     background: tomato;
     color: white;
 }
-.deletebook_btn{
-    background: red;
-    color: white;
+.savebook_btn:hover {
+    cursor: pointer;
+    font-size: 18px;
+    color: black;
 }
 
 /*addbook*/

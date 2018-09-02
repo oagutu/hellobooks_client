@@ -22,7 +22,9 @@ class BookRow extends Component {
       method: 'PUT',
     }
 
-    /** Borrow single book */
+    /** Borrow single book
+     * @memberof BookRow
+     */
     handleBorrow = () => {
       const { value, title, history } = this.props;
       const { path_borrow } = this.state;
@@ -32,14 +34,16 @@ class BookRow extends Component {
         .then(response => (response.json()))
         .then((data) => {
           const msg = data.msg ? data.msg : `Successfully borrowed: ${title}. Return Date: ${data.due_date}`;
-          history.push({ pathname: '/home' });
+          history.push({ pathname: '/borrow-history' });
           show.borrow = !show.borrow;
           this.setState({ show });
           NotificationManager.info(msg, 'Borrow Book');
         });
     }
 
-    /** Delete single book entry */
+    /** Delete single book entry
+     * @memberof BookRow
+     */
     handleDelete = () => {
       const { value, title } = this.props;
       const { path } = this.state;
@@ -152,13 +156,15 @@ class BookRow extends Component {
             <ModalBody>
               <div>
                 <p> Are you sure you want to delete
-                  <span> { title } ?</span>
+                  <span> { title }</span>?<br />
+                  author: <span> { author } </span><br />
+                  book code: <span> { book_code } </span>
                 </p>
               </div>
               <div className="confirm-delete">
                 <Button
                   onClick={this.handleDelete}
-                  style={{ backgroundColor: 'red' }}
+                  style={{ backgroundColor: '#d9534f' }}
                 >
                   Delete
                 </Button>
@@ -178,7 +184,7 @@ class BookRow extends Component {
               <div className="confirm-borrow">
                 <Button
                   onClick={this.handleBorrow}
-                  style={{ backgroundColor: 'blue' }}
+                  style={{ backgroundColor: '#337ab7', float: 'right' }}
                 >
                   Borrow
                 </Button>
@@ -187,7 +193,7 @@ class BookRow extends Component {
           </Modal>
 
           {/* Show more book details */}
-          <Modal isOpen={show.deleteModal} toggle={this.toggle} className="show_book_details_modal">
+          <Modal isOpen={show.moreDetailsModal} toggle={this.toggle} className="show_book_details_modal">
             <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
             <ModalBody>
               <div>
