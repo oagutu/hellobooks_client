@@ -64,7 +64,7 @@ class Profile extends Component {
               name={user_details.name}
               username={user_details.username}
               email={user_details.email}
-              toggle={this.toggle}
+              toggleEditModal={this.toggle}
             />
           </ModalBody>
         </Modal>
