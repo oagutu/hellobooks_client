@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Alert } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 import send from '../Helpers';
 import './landing.css';
 
@@ -22,12 +23,11 @@ class SignupForm extends Component {
       user_details = Object.assign({}, user_details);
       user_details[id] = value;
       this.setState({ user_details });
-    //   console.log(this.state.user_details)
     }
 
     handleSubmit = (e) => {
       e.preventDefault();
-      const { history } = this.props;
+      const { toggle } = this.props;
       const { user_details, headerRequired, showAlert } = this.state;
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/register', headerRequired)
@@ -37,7 +37,8 @@ class SignupForm extends Component {
             showAlert: !showAlert,
             errorMessage: data.msg,
           });
-          history.push({ pathname: '/' });
+          toggle();
+          NotificationManager.success(data.msg, 'signup success:');
         });
     }
 
@@ -70,7 +71,7 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  history: PropTypes.shape().isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default withRouter(SignupForm);

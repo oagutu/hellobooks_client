@@ -46,7 +46,6 @@ class SigninForm extends Component {
             localStorage.setItem('hb_user_role', data.role);
             localStorage.setItem('user', data.user);
             this.setState({ isAuthenticated: true });
-            // console.log('login msg: ', data.msg);
             NotificationManager.success(data.msg, 'login success:');
           } else if (data.msg.includes('Token has expired')) {
             localStorage.clear();
@@ -105,7 +104,7 @@ class SigninForm extends Component {
           <Modal isOpen={show} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>sign up</ModalHeader>
             <ModalBody>
-              <SignupForm />
+              <SignupForm toggle={this.toggle} />
             </ModalBody>
           </Modal>
 
