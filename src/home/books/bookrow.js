@@ -156,8 +156,9 @@ class BookRow extends Component {
             <ModalBody>
               <div>
                 <p> Are you sure you want to delete
-                  <span> { title }</span>?
-                  <p>Author: <span> { author } </span></p>
+                  <span> { title }</span>?<br />
+                  author: <span> { author } </span><br />
+                  book code: <span> { book_code } </span>
                 </p>
               </div>
               <div className="confirm-delete">
