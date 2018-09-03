@@ -39,11 +39,8 @@ const Main = () => (
       <Switch>
         <Route exact path="/" component={App} />
         <PrivateRoute path="/home" component={Home} />
-<<<<<<< HEAD
         <PrivateRoute path="/profile" component={Profile} />
-=======
         <PrivateRoute path="/borrow-history" component={History} />
->>>>>>> 45fecc75af66a0271ecab35e567fd658ced93783
         <PrivateRoute path="/add-book" component={Add} />
         <PrivateRoute path="/all-members" component={Members} />
         <PrivateRoute path="/action-logs" component={Logs} />
