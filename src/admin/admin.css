@@ -15,6 +15,19 @@
     border-color: transparent;
 }
 
+.delete_book_modal .modal-content .modal-body >div >p >span {
+    color:tomato;
+    text-decoration: underline;
+}
+
+.confirm-delete {
+    float: right;
+}
+
+.confirm-delete >button {
+    margin: auto 4px; 
+}
+
 /* Logs */
 
 .col-xs-6>h5{color: tomato;} 
