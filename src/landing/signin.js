@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import {
   Modal, ModalBody, ModalHeader, Button, Alert,
 } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignupForm from './Signup';
 import send from '../Helpers';
@@ -19,11 +19,6 @@ import 'react-notifications/lib/notifications.css';
  * @extends {Component}
  */
 class SigninForm extends Component {
-  static defaultProps = {
-    location: '/home',
-  }
-
-
     state = {
       user_details: { username: '', password: '' },
       show: false,
@@ -54,6 +49,7 @@ class SigninForm extends Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const { user_details, showAlert } = this.state;
+      const { history } = this.props;
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/login')
         .then(response => (response.json()))
@@ -63,7 +59,7 @@ class SigninForm extends Component {
             localStorage.setItem('isAuthenticated', true);
             localStorage.setItem('hb_user_role', data.role);
             localStorage.setItem('user', data.user);
-            this.setState({ isAuthenticated: true });
+            history.push({ pathname: '/home' });
             NotificationManager.success(data.msg, 'login success:');
           } else if (data.msg.includes('Token has expired')) {
             localStorage.clear();
@@ -90,14 +86,9 @@ class SigninForm extends Component {
      * @memberof SigninForm
      */
     render() {
-      const { location } = this.props;
       const {
-        isAuthenticated, showAlert, errorMsg, show,
+        showAlert, errorMsg, show,
       } = this.state;
-
-      if (isAuthenticated === true) {
-        return <Redirect to={location} />;
-      }
 
       return (
         <div className="container login-container">
@@ -143,7 +134,7 @@ class SigninForm extends Component {
 }
 
 SigninForm.propTypes = {
-  location: PropTypes.string,
+  history: PropTypes.shape().isRequired,
 };
 
-export default SigninForm;
+export default withRouter(SigninForm);

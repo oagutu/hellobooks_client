@@ -39,23 +39,33 @@ class Profile extends Component {
     return (
       <div className="container body-sec">
         <h4>User Profile</h4>
-        <div className="container">
+        <div className="container user-profile">
           <div className="profile-one">
             <img
-              src={{ monkey }}
+              src={monkey}
               className="user-prof-pic"
               alt="user profile"
             />
-            <Button onClick={this.toggle}>Edit Profile</Button>
           </div>
-          Name:
-          <div>{user_details.name}</div>
-          Username:
-          <div>{user_details.username}</div>
-          Email:
-          <div>{user_details.email}</div>
-          Account Status/Type:
-          <div>{user_details.acc_status}</div>
+          <div className="container prof-details">
+            <Button onClick={this.toggle}>Edit Profile</Button><br />
+            <div>
+              <span>name:</span><br />
+              {user_details.name}
+            </div>
+            <div>
+              <span>username:</span><br />
+              {user_details.username}
+            </div>
+            <div>
+              <span>email:</span><br />
+              {user_details.email}
+            </div>
+            <div>
+              <span>account Status/Type:</span><br />
+              {user_details.acc_status}
+            </div>
+          </div>
         </div>
         <Modal isOpen={show} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Edit profile: </ModalHeader>
