@@ -4,52 +4,33 @@
     justify-content: center;
 } */
 
-.user-profile {
-    max-width: 50%;
+.card-header {
+    color: tomato;
+}
+
+.card-up {
+    height: 150px;
+    background-color: tomato
+}
+
+.card-body {
     text-align: center;
-    /* border: 0.5px solid black; */
-    box-shadow: 2px 2px 1px tomato;
-}
-.profile-one >img {
-    margin: 10px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    z-index: 100;
-    box-shadow: 3px 3px 2px 1px grey;
+    font-family: 'Poppins', sans-serif;
 }
 
-.prof-details {
-    margin: 10px auto;
-    padding: 30px;
-}
-.prof-details >button {
-    color: white;
-    background: tomato;
-    border: 1px solid tomato;
-    margin: 10px auto;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px 0px grey;
-    font-size: 13px;
+.avatar >img {
+    margin-top: -100px;
 }
 
-.prof-details >button:hover {
-    background: inherit;
-    color: tomato;
-    border: 1px solid tomato;
-}
-
-.prof-details >div {
-    margin: 30px auto;
+.acc_status {
     font-size: 11px;
-    padding-top: 5px;
-    border-top:1px solid tomato;
+    margin: 5px;
 }
 
-.prof-details >div>span {
-    color: tomato;
-    text-decoration: underline;
-    margin-bottom: 10px;
+.change-password {
+    background-color: rgba(0, 0, 0, 0.03);
+    color:tomato;
+    border: 1px solid tomato;
 }
 
 /* Edit user profile form */

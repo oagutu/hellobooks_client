@@ -7,7 +7,12 @@ import {
 import EditUserForm from './edit_user_profile';
 import send from '../Helpers';
 import './profile.css';
-import monkey from './assets/img/monkey.jpeg';
+import bear from './assets/img/bear.jpeg';
+import antelope from './assets/img/antelope.jpeg';
+import ibis from './assets/img/ibis.jpeg';
+import shark from './assets/img/shark.jpeg';
+import owl from './assets/img/owl.jpg';
+import tiger from './assets/img/tiger.jpeg';
 
 
 /** User Profile component */
@@ -16,57 +21,68 @@ class Profile extends Component {
     user_details: {},
     path: '/api/v1/auth/users/profile?q=',
     show: false,
+    image: antelope,
   }
 
+  /**
+   * Fetch user info to be displayed on component render
+   *
+   * @memberof Profile
+   */
   componentDidMount = () => {
+    // Select random image from list to be used as profile pic.
+    const prof_image_list = [bear, antelope, ibis, shark, owl, tiger];
+    const image = prof_image_list[Math.floor(Math.random() * (6 - 0) + 0)];
+
     const user = localStorage.getItem('user');
     const { path } = this.state;
     send({}, 'GET', path + user)
       .then(response => (response.json()))
       .then((data) => {
-        this.setState({ user_details: data.user_data });
+        this.setState({ user_details: data.user_data, image });
       });
   }
 
-  /** Toggle state of edit user profile modal */
+  /**
+   * Toggle state of edit user profile modal
+   *
+   * @memberof Profile
+   */
   toggle = () => {
     const { show } = this.state;
     this.setState({ show: !show });
   }
 
+  /**
+   * Display logged in user's profile
+   *
+   * @memberof Profile
+   */
   render() {
-    const { user_details, show } = this.state;
+    const { user_details, show, image } = this.state;
     return (
       <div className="container body-sec">
-        <h4>User Profile</h4>
-        <div className="container user-profile">
-          <div className="profile-one">
-            <img
-              src={monkey}
-              className="user-prof-pic"
-              alt="user profile"
-            />
+        <div className="card testimonial-card body-sec">
+          <div className="card-header"><h4>{user_details.name}</h4></div>
+
+          <div className="card-up" />
+
+          {/* <!-- Avatar --> */}
+          <div className="avatar mx-auto white">
+            <img src={image} className="rounded-circle" alt="alt" />
           </div>
-          <div className="container prof-details">
-            <Button onClick={this.toggle}>Edit Profile</Button><br />
-            <div>
-              <span>name:</span><br />
-              {user_details.name}
-            </div>
-            <div>
-              <span>username:</span><br />
-              {user_details.username}
-            </div>
-            <div>
-              <span>email:</span><br />
-              {user_details.email}
-            </div>
-            <div>
-              <span>account Status/Type:</span><br />
-              {user_details.acc_status}
-            </div>
+
+          <div className="card-body">
+            {/*  Username */}
+            <h3 className="card-title username"><i className="fa fa-user-o" /> {user_details.username}</h3>
+            <div><i className="fa fa-envelope-o" /> {user_details.email}</div>
+            <div className="acc_status">{user_details.acc_status}</div>
+            <hr />
           </div>
+          <Button className="change-password" onClick={this.toggle}><i className="fa fa-edit" /> change password</Button>
         </div>
+
+        {/* Change password modal */}
         <Modal isOpen={show} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Edit profile: </ModalHeader>
           <ModalBody>
@@ -78,7 +94,9 @@ class Profile extends Component {
             />
           </ModalBody>
         </Modal>
+
       </div>
+
     );
   }
 }
