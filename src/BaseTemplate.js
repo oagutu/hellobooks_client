@@ -8,22 +8,23 @@ import { NotificationManager } from 'react-notifications';
 import send from './Helpers';
 import './index.css';
 
-/** Navbar template component that is shared by all other components in the hello books app */
+/**
+ * Navbar template component that is shared by all other components in the hello books ap
+ *
+ * @class BaseTemplate
+ * @extends {Component}
+ */
 class BaseTemplate extends Component {
   /** Component state holds data on state of menu dropdown, admin statut and active tab/page  */
   state = {
     dropdownOpen: false,
-    isAdmin: false,
   }
 
-  componentDidMount = () => {
-    // Set role of logged in user ie. if they are an admin or not
-    const role = localStorage.getItem('hb_user_role');
-    const isAdmin = role === 'admin';
-    this.setState({ isAdmin });
-  }
-
-  /** Log out already logged in user. */
+  /**
+   * Log out already logged in user.
+   *
+   * @memberof BaseTemplate
+   */
   handleLogOut = () => {
     const { history } = this.props;
     send({}, 'POST', '/api/v1/auth/logout')
@@ -35,22 +36,31 @@ class BaseTemplate extends Component {
       .then((data) => {
         if (data.message === 'Successfully logged out') {
           localStorage.clear();
+          // this.setState({ isAdmin: false, user: null });
           history.push({ pathname: '/' });
           NotificationManager.info(data.message, 'logout success:');
         }
       });
   };
 
-  /** Toggle state of dropdown menu to make visible when required. */
+
+  /**
+   * Toggle state of dropdown menu to make visible when required.
+   *
+   *  @memberof BaseTemplate
+   */
   toggle = () => {
     const { dropdownOpen } = this.state;
     this.setState({ dropdownOpen: !dropdownOpen });
   };
 
-  /** Renders navbar based on whether a user is logged in or not. */
+  /**
+   * Renders navbar based on whether a user is logged in or not.
+   *
+   * @memberof BaseTemplate
+   */
   render() {
-    const { dropdownOpen, isAdmin } = this.state;
-
+    // Display landing page navbar if user not logged in.
     if (!localStorage.getItem('isAuthenticated')) {
       return (
         <nav className="navbar">
@@ -60,6 +70,12 @@ class BaseTemplate extends Component {
         </nav>
       );
     }
+
+    // Set navbar dropdown values eg. user and isAdmin/admin only links(if necessary)
+    const { dropdownOpen } = this.state;
+    const role = localStorage.getItem('hb_user_role');
+    const user = localStorage.getItem('user');
+    const isAdmin = role === 'admin';
 
     return (
       <nav className="navbar fixed-top">
@@ -72,7 +88,7 @@ class BaseTemplate extends Component {
 
         <Dropdown isOpen={dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            <i className="fa fa-user-circle-o" />
+            <span className="user-id-nav">{user}</span> <i className="fa fa-user-circle-o" />
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem id="prof-btn"><Link to="/profile"><i className="fa fa-user" />Profile</Link></DropdownItem>

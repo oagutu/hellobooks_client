@@ -10,6 +10,7 @@ import './index.css';
 import Navbar from './BaseTemplate';
 import App from './landing/index';
 import Home from './home/index';
+import Profile from './profile/profile';
 import Add from './admin/books/add_book';
 import Members from './admin/members/members';
 import Logs from './admin/logs/logs';
@@ -38,6 +39,7 @@ const Main = () => (
       <Switch>
         <Route exact path="/" component={App} />
         <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/borrow-history" component={History} />
         <PrivateRoute path="/add-book" component={Add} />
         <PrivateRoute path="/all-members" component={Members} />

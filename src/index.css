@@ -38,6 +38,11 @@ body {height: 100%;}
     float: left;
 }
 
+.user-id-nav {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
 .dropdown> button {
     background-color: inherit;
     border: 0px;

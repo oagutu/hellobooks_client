@@ -1,0 +1,74 @@
+/* .body-sec{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.card-header {
+    color: tomato;
+}
+
+.card-up {
+    height: 150px;
+    background-color: tomato
+}
+
+.card-body {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.avatar >img {
+    margin-top: -100px;
+}
+
+.acc_status {
+    font-size: 11px;
+    margin: 5px;
+}
+
+.change-password {
+    background-color: rgba(0, 0, 0, 0.03);
+    color:tomato;
+    border: 1px solid tomato;
+}
+
+/* Edit user profile form */
+
+.edit-user-profile >input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid tomato;
+    border-left: 1px solid tomato;
+    margin-bottom: 7px;
+}
+
+.edit-user-profile >input:read-only {
+    background-color: #ffece6;
+}
+
+.edit-user-profile >button {
+    margin: 10px;
+    float: right;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    padding: 5px 15px;
+}
+
+.edit-user-profile >span {
+    margin: 5px auto;
+    font-size: 12px;
+}
+
+.required { color: red;}
+
+.edit-user-profile >button:hover {
+    background-color: #449d44
+}
+
+@media(max-width:540px) {
+    .user-profile {
+        min-width: 100%;
+        border: 0px;
+    }
+}

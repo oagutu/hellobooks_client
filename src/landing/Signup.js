@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Alert } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 import send from '../Helpers';
 import './landing.css';
 
+/**
+ * New User Sign up form component
+ *
+ * @class SignupForm
+ * @extends {Component}
+ */
 class SignupForm extends Component {
     state = {
       user_details: {
@@ -16,18 +23,29 @@ class SignupForm extends Component {
 
     }
 
+    /**
+     * Update component state based on user input.
+     *
+     * @memberof SignupForm
+     * @param {object} e (user input event)
+     */
     handleChange = (e) => {
       const { id, value } = e.target;
       let { user_details } = this.state;
       user_details = Object.assign({}, user_details);
       user_details[id] = value;
       this.setState({ user_details });
-    //   console.log(this.state.user_details)
     }
 
+    /**
+     * Submit new user details to api for user registration.
+     *
+     * @memberof SignupForm
+     * @param {object} e User input event
+     */
     handleSubmit = (e) => {
       e.preventDefault();
-      const { history } = this.props;
+      const { toggle } = this.props;
       const { user_details, headerRequired, showAlert } = this.state;
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/register', headerRequired)
@@ -37,10 +55,17 @@ class SignupForm extends Component {
             showAlert: !showAlert,
             errorMessage: data.msg,
           });
-          history.push({ pathname: '/' });
+          toggle();
+          NotificationManager.success(data.msg, 'signup success:');
         });
     }
 
+    /**
+     * Display new user sign up form.
+     *
+     * @returns {object} HTML div element
+     * @memberof SignupForm
+     */
     render() {
       const { showAlert, errorMessage } = this.state;
       return (
@@ -70,7 +95,7 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  history: PropTypes.shape().isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default withRouter(SignupForm);
