@@ -63,7 +63,7 @@ class BaseTemplate extends Component {
     // Display landing page navbar if user not logged in.
     if (!localStorage.getItem('isAuthenticated')) {
       return (
-        <nav className="navbar">
+        <nav className="navbar" id="navbar-landing">
           <a className="navbar-brand brand-log" href="/">hello
             <b style={{ color: 'tomato' }}>books</b>
           </a>
@@ -78,7 +78,7 @@ class BaseTemplate extends Component {
     const isAdmin = role === 'admin';
 
     return (
-      <nav className="navbar fixed-top">
+      <nav className="navbar fixed-top" id="navbar-authenticated">
         <a className="navbar-brand brand-main" href="/home">
             hello
           <b style={{ color: 'white' }}>

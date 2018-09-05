@@ -7,7 +7,7 @@ import {
 import { NotificationManager } from 'react-notifications';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SignupForm from './Signup';
+import SignupForm from './signup';
 import send from '../Helpers';
 import './landing.css';
 import 'react-notifications/lib/notifications.css';
@@ -50,6 +50,7 @@ class SigninForm extends Component {
       e.preventDefault();
       const { user_details, showAlert } = this.state;
       const { history } = this.props;
+      console.log('>>>', this.props);
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/login')
         .then(response => (response.json()))

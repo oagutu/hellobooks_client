@@ -9,7 +9,6 @@ class UserLogTable extends Component {
   }
 
   render() {
-    console.log('user_logs: ', this.props);
     const { details } = this.props;
     return (
       <Table>
@@ -42,7 +41,6 @@ class UserLogTable extends Component {
 
 UserLogTable.propTypes = {
   details: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  count: PropTypes.number.isRequired,
 };
 
 export default UserLogTable;

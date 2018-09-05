@@ -87,7 +87,7 @@ class SignupForm extends Component {
               <br />
             </fieldset>
             <br />
-            <button type="submit" className="sign-up-btn">create account</button>
+            <button type="submit" className="sign-up-btn" id="sign-up-btn">create account</button>
           </form>
         </div>
       );

@@ -9,7 +9,7 @@ class BookLogTable extends Component {
   }
 
   render() {
-    console.log('user_logs: ', this.props);
+    console.log('user_logs: ', typeof this.props);
     const { details } = this.props;
     return (
       <Table>
@@ -42,7 +42,6 @@ class BookLogTable extends Component {
 
 BookLogTable.propTypes = {
   details: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  count: PropTypes.number.isRequired,
 };
 
 export default BookLogTable;

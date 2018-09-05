@@ -10,7 +10,6 @@ const logRow = (props) => {
   } = props;
   const recipient_id = user_id || book_id;
   const success_icon = success ? 'fa fa-check' : 'fa fa-close';
-  console.log(value);
 
   return (
     <tr className="log-row">
