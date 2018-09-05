@@ -271,28 +271,40 @@ updatebook-sec {
     /* margin-top: 35%; */
 }
 
-.addbook_form >input, .addbook_form >textarea{
+.addbook_form >label {
+    font-size: 11px;
+    color: tomato;
+}
+
+.addbook_form >label, .addbook_form >textarea{
     width: 100%;
     margin: 15px 5px;
 }
+.addbook_form >label>input {
+    width: 100%;
+    font-size: 13px;
+}
+
 .addbook_form >select{
     margin: 15px 15px;
 }
-.upload-cover-pic{
-    background: #47d147;
-    color: white;
-    border-radius: 10px;
-    border:none;
+
+label >select {
+    float: right;
 }
-.upload-cover-pic:hover{
-    cursor: pointer;
-    font-size: 15px;
+
+.genre_label {
+    padding-bottom: 7px;
+    border-bottom: 0.5px solid gray;
 }
+
 .savebook_btn {
+    margin-top:7px;
     border-radius: 10px;
     border: none;
     background: tomato;
     color: white;
+    width:100%;
 }
 .savebook_btn:hover {
     cursor: pointer;

@@ -64,7 +64,7 @@ class SigninForm extends Component {
           } else if (data.msg.includes('Token has expired')) {
             localStorage.clear();
           } else {
-            this.setState({ showAlert: !showAlert, errorMsg: data.msg });
+            this.setState({ showAlert: true, errorMsg: data.msg });
           }
         });
     };
