@@ -46,17 +46,20 @@ class SignupForm extends Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const { toggle } = this.props;
-      const { user_details, headerRequired, showAlert } = this.state;
+      const { user_details, headerRequired } = this.state;
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/register', headerRequired)
         .then(response => (response.json()))
         .then((data) => {
-          this.setState({
-            showAlert: !showAlert,
-            errorMessage: data.msg,
-          });
-          toggle();
-          NotificationManager.success(data.msg, 'signup success:');
+          if (data.msg.includes('Successfully')) {
+            toggle();
+            NotificationManager.success(data.msg, 'signup success:');
+          } else {
+            this.setState({
+              showAlert: true,
+              errorMessage: data.msg,
+            });
+          }
         });
     }
 
@@ -75,7 +78,13 @@ class SignupForm extends Component {
           </Alert>
           <form className="signup-form" onSubmit={this.handleSubmit}>
             <fieldset>
-              <input type="text" id="username" placeholder="username" onChange={this.handleChange} required />
+              <input
+                type="text"
+                id="username"
+                placeholder="username"
+                onChange={this.handleChange}
+                required
+              />
               <br />
               <input type="text" id="name" placeholder="name" onChange={this.handleChange} required />
               <br />

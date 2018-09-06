@@ -45,7 +45,7 @@ class BookRow extends Component {
      * @memberof BookRow
      */
     handleDelete = () => {
-      const { value, title } = this.props;
+      const { value, title, updateOnAction } = this.props;
       const { path } = this.state;
       let { show } = this.state;
       show = Object.assign({}, show);
@@ -53,8 +53,13 @@ class BookRow extends Component {
         .then((response) => {
           if (response.status === 204) {
             show.deleteModal = !show.deleteModal;
+            updateOnAction(value, true);
             this.setState({ show });
             NotificationManager.info(`Successfully deleted: ${title}`, 'Delete Book');
+          } else if (response.status === 403) {
+            show.deleteModal = !show.deleteModal;
+            this.setState({ show });
+            NotificationManager.error(`Unable to delete: ${title} as it's currently borrowed`, 'Delete Book');
           }
         });
     }
@@ -91,6 +96,14 @@ class BookRow extends Component {
         show.borrow = false;
       }
       this.setState({ show });
+    }
+
+    toggleEdit = (book) => {
+      const { show } = this.state;
+      const { updateOnAction } = this.props;
+      show.edit = !show.edit;
+      this.setState({ show });
+      updateOnAction(book, false);
     }
 
     render() {
@@ -146,6 +159,7 @@ class BookRow extends Component {
                 details={this.props}
                 path={path + String(value)}
                 method={method}
+                toggle={this.toggleEdit}
               />
             </ModalBody>
           </Modal>
@@ -219,6 +233,7 @@ BookRow.propTypes = {
   synopsis: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   history: PropTypes.shape().isRequired,
+  updateOnAction: PropTypes.func.isRequired,
 };
 
 export default withRouter(BookRow);

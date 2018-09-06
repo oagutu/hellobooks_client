@@ -19,7 +19,7 @@ class Books extends Component {
 
     render() {
       const {
-        books, page_list, handlePagination, isNotNext, isNotPrev, handleChange,
+        books, page_list, handlePagination, isNotNext, isNotPrev, handleChange, updateOnAction,
       } = this.props;
       const { isAdmin } = this.state;
 
@@ -77,6 +77,7 @@ class Books extends Component {
                   genre={m.genre}
                   sub_genre={m.sub_genre}
                   synopsis={m.synopsis}
+                  updateOnAction={updateOnAction}
                   isAdmin={isAdmin}
                 />))}
             </tbody>
@@ -97,6 +98,7 @@ Books.propTypes = {
   isNotNext: PropTypes.bool.isRequired,
   isNotPrev: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
+  updateOnAction: PropTypes.func.isRequired,
   // current_page: PropTypes.number.isRequired,
 };
 

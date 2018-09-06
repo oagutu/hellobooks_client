@@ -9,7 +9,7 @@ import '../admin.css';
 class AddEdit extends Component {
     state = {
       bookDetails: {
-        title: '', author: '', book_code: Number(), ddc_code: '', synopsis: '', genre: '', subgenre: 'NA',
+        title: '', author: '', book_code: null, ddc_code: '', synopsis: '', genre: 'fiction', subgenre: 'NA',
       },
       showAlert: false,
       errorMessage: '',
@@ -38,28 +38,24 @@ class AddEdit extends Component {
       e.preventDefault();
       this.setState({ showAlert: false });
       let { bookDetails } = this.state;
-      const { showAlert } = this.state;
+      const { toggle, isHeader } = this.props;
       // Helps convert book code to integer type as is required by  add book endpoint.
       bookDetails = Object.assign({},
         bookDetails,
-        { book_code: Number(bookDetails.book_code) });
+        { ddc_code: String(bookDetails.ddc_code), book_code: Number(bookDetails.book_code) });
       const { method, path, history } = this.props;
 
       send(bookDetails, method, path)
         .then(response => (
           response.json()))
         .then((data) => {
-          console.log(data);
           if (Object.values(data).toString().includes('Successfully')) {
-            this.setState({
-              showAlert: !showAlert,
-              errorMessage: data.msg,
-            });
+            if (isHeader) { toggle(bookDetails); }
             history.push({ pathname: '/home' });
             NotificationManager.success(data.msg, 'Add/edit book:');
           } else {
             this.setState({
-              showAlert: !showAlert,
+              showAlert: true,
               errorMessage: data.msg,
             });
           }
@@ -83,66 +79,77 @@ class AddEdit extends Component {
             Add a Book:
           </h2>
           <form className="addbook_form" onSubmit={this.handleSubmit}>
-            <input type="text" id="title" placeholder="title" onChange={this.handleChange} value={bookDetails.title} />
+            <label htmlFor="title">title
+              <input type="text" id="title" placeholder="title" onChange={this.handleChange} value={bookDetails.title} required />
+            </label><br />
+            {/* <br /> */}
+            <label htmlFor="book_code">book code
+              <input type="number" id="book_code" placeholder="isbn code" onChange={this.handleChange} value={bookDetails.book_code} required />
+            </label> <br />
+            <label htmlFor="ddc_code">DDC code
+              <input type="number" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={bookDetails.ddc_code} required />
+            </label><br />
+            <label htmlFor="author">author
+              <input type="text" id="author" placeholder="author" onChange={this.handleChange} value={bookDetails.author} required />
+            </label>
             <br />
-            <input type="number" id="book_code" placeholder="code" onChange={this.handleChange} value={bookDetails.book_code} />
-            <input type="text" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={bookDetails.ddc_code} />
+            <label htmlFor="synopsis">synopsis
+              <textarea
+                id="synopsis"
+                name="book_synopsis"
+                placeholder="synopsis"
+                style={{ width: '100%', height: 'auto' }}
+                onChange={this.handleChange}
+                value={bookDetails.synopsis}
+              />
+            </label>
             <br />
-            <input type="text" id="author" placeholder="author" onChange={this.handleChange} value={bookDetails.author} />
+            <label htmlFor="genre" className="genre_label">genre:
+              <select name="select genre" id="genre" className="genre" onChange={this.handleChange} value={bookDetails.genre}>
+                <option disabled>
+                  select genre
+                </option>
+                <option value="fiction" defaultValue>
+                  fiction
+                </option>
+                <option value="non-fiction">
+                  non-fiction
+                </option>
+              </select>
+            </label>
+            <label htmlFor="subgenre" className="genre_label">sub-genre:
+              <select name="select sub-genre" id="subgenre" className="sub-genre" onChange={this.handleChange} value={bookDetails.subgenre}>
+                <option disabled>
+                  select subgenre
+                </option>
+                <option defaultValue>
+                  NA
+                </option>
+                <option value="sci-fi">
+                  sci-fi
+                </option>
+                <option value="fantasy">
+                  fantasy
+                </option>
+                <option value="biopic">
+                  biopic
+                </option>
+                <option value="romance">
+                  romance
+                </option>
+                <option value="young adult">
+                  young adult
+                </option>
+                <option value="children's">
+                  children&apos;s
+                </option>
+                <option value="other">
+                  other
+                </option>
+              </select>
+            </label>
             <br />
-            <textarea
-              id="synopsis"
-              name="book_synopsis"
-              placeholder="synopsis"
-              style={{ width: '100%', height: 'auto' }}
-              onChange={this.handleChange}
-              value={bookDetails.synopsis}
-            />
-            <br />
-            genre:
-            <select name="select genre" id="genre" className="genre" onChange={this.handleChange} value={bookDetails.genre}>
-              <option disabled>
-                select genre
-              </option>
-              <option value="fiction" defaultValue>
-                fiction
-              </option>
-              <option value="non-fiction">
-                non-fiction
-              </option>
-            </select>
-            sub-genre
-            <select name="select sub-genre" id="subgenre" className="sub-genre" onChange={this.handleChange} value={bookDetails.subgenre}>
-              <option disabled>
-                select subgenre
-              </option>
-              <option defaultValue>
-                NA
-              </option>
-              <option value="sci-fi">
-                sci-fi
-              </option>
-              <option value="fantasy">
-                fantasy
-              </option>
-              <option value="biopic">
-                biopic
-              </option>
-              <option value="romance">
-                romance
-              </option>
-              <option value="young adult">
-                young adult
-              </option>
-              <option value="children's">
-                children&apos;s
-              </option>
-              <option value="other">
-                other
-              </option>
-            </select>
-            <br />
-            <input type="submit" value="save" className="savebook_btn" />
+            <input type="submit" value="add/edit book" className="savebook_btn" />
           </form>
         </div>
       );
@@ -152,6 +159,7 @@ class AddEdit extends Component {
 AddEdit.defaultProps = {
   isHeader: false,
   details: {},
+  toggle: () => {},
 };
 
 /** Offers typechecking for the AddEdit component props */
@@ -161,6 +169,7 @@ AddEdit.propTypes = {
   method: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   history: PropTypes.shape().isRequired,
+  toggle: PropTypes.func,
 };
 
 export default withRouter(AddEdit);
