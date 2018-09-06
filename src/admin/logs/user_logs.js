@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import LogRow from './log_row';
 
+/**
+ * User action log table
+ *
+ * @class UserLogTable
+ * @extends {Component}
+ */
 class UserLogTable extends Component {
   state = {
     isResultLimited: false,
   }
 
   render() {
-    console.log('user_logs: ', this.props);
     const { details } = this.props;
     return (
       <Table>

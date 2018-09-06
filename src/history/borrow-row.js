@@ -10,6 +10,12 @@ import PropTypes from 'prop-types';
 import send from '../Helpers';
 
 
+/**
+ * User borrow history table row component
+ *
+ * @class BorrowHistory
+ * @extends {Component}
+ */
 class BorrowHistory extends Component {
   state = { returnOpen: false, path: '/api/v1/users/books/', isReturned: false }
 
@@ -20,7 +26,9 @@ class BorrowHistory extends Component {
     this.setState({ isReturned });
   }
 
-  /** Return single book. */
+  /**
+   * Return single book.
+   */
   handleReturn = () => {
     const {
       book_id, title, history, updateStateOnReturn,

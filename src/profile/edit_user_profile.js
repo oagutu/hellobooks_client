@@ -6,6 +6,12 @@ import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import send from '../Helpers';
 
+/**
+ * Edit user profile/change password form componet
+ *
+ * @class EditUserForm
+ * @extends {Component}
+ */
 class EditUserForm extends Component {
   state = {
     edit_details: { current_password: null, new_password: null, confirm_password: null },
@@ -13,11 +19,19 @@ class EditUserForm extends Component {
     errorMsg: null,
   }
 
+  /**
+   * Handle changing state of alert for errors when changing password
+   */
   toggle = () => {
     const { showAlert } = this.state;
     this.setState({ showAlert: !showAlert });
   }
 
+  /**
+   * Submit change password details to api endpoint and receive response
+   *
+   * @param {*} e
+   */
   handleSubmit = (e) => {
     e.preventDefault();
     const { toggleEditModal } = this.props;
@@ -35,6 +49,11 @@ class EditUserForm extends Component {
   }
 
 
+  /**
+   * Handle user input changes on the edit user profile form
+   *
+   * @param {*} e
+   */
   handlechange = (e) => {
     const { id, value } = e.target;
     let { edit_details } = this.state;

@@ -4,6 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
+/**
+ * Single log row component
+ *
+ * @param {*} props
+ */
 const logRow = (props) => {
   const {
     value, user_id, book_id, timestamp, success, action,

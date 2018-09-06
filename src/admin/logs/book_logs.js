@@ -3,13 +3,24 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import LogRow from './log_row';
 
+/**
+ * Book actions log component
+ *
+ * @class BookLogTable
+ * @extends {Component}
+ */
 class BookLogTable extends Component {
   state = {
     isResultLimited: false,
   }
 
+  /**
+   * Display book actions log table
+   *
+   * @returns table component
+   * @memberof BookLogTable
+   */
   render() {
-    console.log('user_logs: ', this.props);
     const { details } = this.props;
     return (
       <Table>

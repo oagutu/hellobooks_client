@@ -6,6 +6,12 @@ import { NotificationManager } from 'react-notifications';
 import send from '../../Helpers';
 import '../admin.css';
 
+/**
+ *Add/Edit book component
+ *
+ * @class AddEdit
+ * @extends {Component}
+ */
 class AddEdit extends Component {
     state = {
       bookDetails: {
@@ -15,6 +21,11 @@ class AddEdit extends Component {
       errorMessage: '',
     }
 
+    /**
+     * Set form input values if editing.
+     *
+     * @memberof AddEdit
+     */
     componentDidMount = () => {
       const { details, isHeader } = this.props;
       if (isHeader) {
@@ -23,7 +34,11 @@ class AddEdit extends Component {
       }
     }
 
-    /** Update state based on user actions in input fields */
+    /**
+     *  Update state based on user actions in input fields
+     *
+     * @memberof AddEdit
+     */
     handleChange = (e) => {
       const { id } = e.target;
       let { bookDetails } = this.state;
@@ -33,7 +48,11 @@ class AddEdit extends Component {
       // console.log(bookDetails);
     }
 
-    /** Submit added book data to api endpoint and process response */
+    /**
+     * Submit added book data to api endpoint and process response
+     *
+     * @param {*} e event
+     */
     handleSubmit = (e) => {
       e.preventDefault();
       this.setState({ showAlert: false });
@@ -44,7 +63,7 @@ class AddEdit extends Component {
         bookDetails,
         { ddc_code: String(bookDetails.ddc_code), book_code: Number(bookDetails.book_code) });
       const { method, path, history } = this.props;
-
+      // Access add/edit book endpoints.
       send(bookDetails, method, path)
         .then(response => (
           response.json()))
@@ -62,10 +81,15 @@ class AddEdit extends Component {
         });
     }
 
+    /**
+     * Display the add/edit book form
+     *
+     * @returns
+     * @memberof AddEdit
+     */
     render() {
       const { showAlert, errorMessage, bookDetails } = this.state;
       const { isHeader } = this.props;
-      // console.log(bookDetails);
 
       return (
 
@@ -78,11 +102,11 @@ class AddEdit extends Component {
           <h2 className="page-header" hidden={isHeader}>
             Add a Book:
           </h2>
+          {/* Add/Edit book form */}
           <form className="addbook_form" onSubmit={this.handleSubmit}>
             <label htmlFor="title">title
               <input type="text" id="title" placeholder="title" onChange={this.handleChange} value={bookDetails.title} required />
             </label><br />
-            {/* <br /> */}
             <label htmlFor="book_code">book code
               <input type="number" id="book_code" placeholder="isbn code" onChange={this.handleChange} value={bookDetails.book_code} required />
             </label> <br />

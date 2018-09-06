@@ -4,6 +4,12 @@ import UserLogTable from './user_logs';
 import BookLogTable from './book_logs';
 import send, { sessionExpire } from '../../Helpers';
 
+/**
+ * Main logs component
+ *
+ * @class Log
+ * @extends {Component}
+ */
 class Log extends Component {
   state = {
     book_logs: [],
@@ -11,13 +17,15 @@ class Log extends Component {
     count: 0,
   }
 
+  /**
+   * Fetch log data from endpoint on component loading
+   */
   componentDidMount = () => {
     const { history } = this.props;
     send({}, 'GET', '/api/v1/auth/users/logs')
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ user_logs: data.logs, count: data.count });
-        // console.log('home>> ', data);
       })
       .catch(() => {
         sessionExpire(history);
@@ -27,7 +35,6 @@ class Log extends Component {
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ book_logs: data.logs, count: data.count });
-        // console.log('home>> ', data);
       })
       .catch(() => {
         sessionExpire(history);
