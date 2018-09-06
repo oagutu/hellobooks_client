@@ -7,7 +7,7 @@ import {
 import { NotificationManager } from 'react-notifications';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import SignupForm from './signup';
+import SignupForm from './Signup';
 import send from '../Helpers';
 import './landing.css';
 import 'react-notifications/lib/notifications.css';

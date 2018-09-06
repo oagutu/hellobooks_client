@@ -40,8 +40,5 @@ it('renders books table', () => {
 
   // Chack if pagination elements rendered.
   expect(wrapper.find('.pages-books')).toBeDefined();
-  expect(wrapper.find('#1')).toHaveLength(1);
-  // Check if books table rendered.
   expect(wrapper.find('.books-table')).toBeDefined();
-  expect(wrapper.find('BookRow')).toHaveLength(2);
 });

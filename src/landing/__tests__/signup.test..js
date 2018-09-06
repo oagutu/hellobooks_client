@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 // import { fetchMock } from 'fetch-mock';
 import sinon from 'sinon';
-import { mount } from 'enzyme';
-import Signup from '../signup';
+import { mount, shallow } from 'enzyme';
+import Signup from '../Signup';
 
 
 const localStorageMock = {
@@ -31,7 +31,7 @@ it('returns an object if status code is created', () => {
     }),
   }));
   const toggle = sinon.spy();
-  const wrapper = mount(<Router><Signup toggle={toggle} /></Router>);
+  const wrapper = shallow(<Router><Signup toggle={toggle} /></Router>);
   wrapper.update();
   console.log(wrapper.debug());
   wrapper.setState({ errorMessage: 'Successfully registered test' });
@@ -59,5 +59,5 @@ it('test user signupsubmit', () => {
   // const wrapper = mount(<Signin />)
   const handleSubmit = sinon.spy();
   const wrapper = mount(<Router><Signup change={handleSubmit} /></Router>);
-  wrapper.find('#sign-up-btn').simulate('submit');
+  wrapper.find('.signup-form').simulate('submit');
 });

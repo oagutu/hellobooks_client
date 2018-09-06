@@ -4,6 +4,12 @@ import { mount } from 'enzyme';
 // import sinon from 'sinon';
 import History from '../history';
 
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock;
 
 window.fetch = jest.fn()
   .mockImplementationOnce(() => ({
@@ -27,7 +33,7 @@ window.fetch = jest.fn()
     status: 500,
   }));
 
-it('renders user profile', () => {
+it('renders user history', () => {
   const wrapper = mount(<Router><History /></Router>);
   wrapper.update();
 

@@ -58,5 +58,8 @@ PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
 };
 
+// For testing
+export default Main;
+
 ReactDOM.render(<Main />, document.getElementById('root'));
 registerServiceWorker();
