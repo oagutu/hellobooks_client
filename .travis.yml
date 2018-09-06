@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install --dev coveralls
+
+script:
+  - npm test
+
+after_success:
+  - npm run coveralls
