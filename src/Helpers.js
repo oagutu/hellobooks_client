@@ -1,7 +1,15 @@
+/** Contains functions that are used throughout the app */
 import { NotificationManager } from 'react-notifications';
 
-/** Create and send api fetch request.
+/**
+ * Create and send api fetch request.
  * returns promise object.
+ *
+ * @param {*} data
+ * @param {string} [method='POST']
+ * @param {*} path
+ * @param {boolean} [headerRequired=true]
+ * @returns
  */
 const send = (data, method = 'POST', path, headerRequired = true) => {
   const url = 'http://127.0.0.1:5000';
@@ -20,7 +28,11 @@ const send = (data, method = 'POST', path, headerRequired = true) => {
   return fetch(myRequest);
 };
 
-/** Logout user in the case of session expiry. */
+/**
+ * Logout user in the case of session expiry.
+ *
+ * @param {*} { history }
+ */
 const sessionExpire = ({ history }) => {
   localStorage.clear();
   history.push({ pathname: '/' });

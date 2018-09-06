@@ -4,8 +4,12 @@ import { Table } from 'reactstrap';
 import BorrowRow from './borrow-row';
 import './history.css';
 
-/** Borrow history main component.
+/**
+ * Borrow history main component.
  * Displays table with either returned or unreturned books.
+ *
+ * @param {*} props
+ * @returns
  */
 const BorrowHistory = (props) => {
   const { borrow_details, updateStateOnReturn } = props;

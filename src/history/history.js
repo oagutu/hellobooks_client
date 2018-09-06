@@ -14,26 +14,33 @@ import send, { sessionExpire } from '../Helpers';
 import BorrowHistory from './history-borrow';
 import './history.css';
 
-/** Main user borrow history component.
+/**
+ * Main user borrow history component.
  * All api fetches called from this component.
-*/
+ *
+ * @class Home
+ * @extends {Component}
+ */
 class Home extends Component {
   state = { borrow_details: [], activeTab: 'unreturned' }
 
+  /**
+   * Fetch a user's borrowing history
+   */
   componentDidMount = () => {
     const { history } = this.props;
     send({}, 'GET', '/api/v1/users/books')
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ borrow_details: data });
-        // console.log('home>> ', data);
       })
       .catch(() => {
         sessionExpire(history);
       });
   }
 
-  /** Update borrowed book component based on returned book.
+  /**
+   * Update borrowed book component based on returned book.
    * @param {object} data
   */
   updateStateOnReturn = (data) => {
@@ -47,7 +54,8 @@ class Home extends Component {
     this.setState({ borrow_details });
   }
 
-  /** Toggle between returned and unreturned book tabs.
+  /**
+   * Toggle between returned and unreturned book tabs.
    * @param {string} tab
   */
   toggle = (tab) => {
@@ -62,8 +70,10 @@ class Home extends Component {
     return (
       <div className="container body-sec">
         <h3 className="library-table">Borrowed Books:</h3>
+        {/* navbar with returned and unreturned books tabs */}
         <Nav tabs>
           <NavItem>
+            {/* Lists all unreturned books */}
             <NavLink
               className={classnames({ active: activeTab === 'unreturned' })}
               onClick={() => { this.toggle('unreturned'); }}
@@ -72,6 +82,7 @@ class Home extends Component {
             </NavLink>
           </NavItem>
           <NavItem>
+            {/* Lists all returned books */}
             <NavLink
               className={classnames({ active: activeTab === 'returned' })}
               onClick={() => { this.toggle('returned'); }}

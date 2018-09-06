@@ -5,6 +5,12 @@ import { NotificationManager } from 'react-notifications';
 import send from '../../Helpers';
 import '../admin.css';
 
+/**
+ * Edit user status role
+ *
+ * @class EditRoleForm
+ * @extends {Component}
+ */
 class EditRoleForm extends Component {
   state = {
     user_details: { new_status: 'member', user: '' },
@@ -17,6 +23,11 @@ class EditRoleForm extends Component {
     this.setState({ user_details });
   }
 
+  /**
+   * Change user status/role
+   *
+   * @memberof EditRoleForm
+   */
   handleSubmit = (e) => {
     e.preventDefault();
     const { user_details } = this.state;
@@ -31,6 +42,11 @@ class EditRoleForm extends Component {
       });
   }
 
+    /**
+     * Update form inputs based on user action
+     *
+     * @param {*} e
+     */
     handleChange = (e) => {
       let { user_details } = this.state;
       user_details = Object.assign({}, user_details);

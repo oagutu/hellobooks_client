@@ -15,7 +15,12 @@ import owl from './assets/img/owl.jpg';
 import tiger from './assets/img/tiger.jpeg';
 
 
-/** User Profile component */
+/**
+ * User Profile component
+ *
+ * @class Profile
+ * @extends {Component}
+ */
 class Profile extends Component {
   state = {
     user_details: {},
@@ -36,6 +41,7 @@ class Profile extends Component {
 
     const user = localStorage.getItem('user');
     const { path } = this.state;
+    // Fetch change password endpoint
     send({}, 'GET', path + user)
       .then(response => (response.json()))
       .then((data) => {
@@ -67,7 +73,7 @@ class Profile extends Component {
 
           <div className="card-up" />
 
-          {/* <!-- Avatar --> */}
+          {/* <!-- Rnadomnly selected avatar --> */}
           <div className="avatar mx-auto white">
             <img src={image} className="rounded-circle" alt="alt" />
           </div>

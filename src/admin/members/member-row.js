@@ -7,12 +7,22 @@ import EditRoleForm from './edit-role-form';
 import '../admin.css';
 
 
+/**
+ * Single member row component
+ *
+ * @class MemberRow
+ * @extends {Component}
+ */
 class MemberRow extends Component {
   state = {
     // tooltipOpen: false,
     show: false,
   }
 
+  /**
+   * Change state of edit user role modal
+   *
+   */
   toggle =() => {
     const { show } = this.state;
     this.setState({ show: !show });

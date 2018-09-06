@@ -17,10 +17,11 @@ import Logs from './admin/logs/logs';
 import History from './history/history';
 import registerServiceWorker from './registerServiceWorker';
 
-
-// const Test = () => (<h2>TESTED!</h2>);
-
-// Represents all protected routes
+/**
+ * Represents all protected routes
+ *
+ * @param {*} { component: Component, ...rest }
+ */
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -31,18 +32,32 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+/**
+ * Main app component.
+ * All routes declared here
+ *
+ */
 const Main = () => (
   <Router>
     <div className="main-container">
+      {/* Navbar used across the app amnd so is not declared within the switch */}
       <Navbar />
       <NotificationContainer />
+      {/* switch component runs through all requested paths until one matches */}
       <Switch>
+        {/* landing page */}
         <Route exact path="/" component={App} />
+        {/* home page/ default authenticated user page */}
         <PrivateRoute path="/home" component={Home} />
+        {/* user profile page */}
         <PrivateRoute path="/profile" component={Profile} />
+        {/* user borrow history page */}
         <PrivateRoute path="/borrow-history" component={History} />
+        {/* [ADMiN ONLY]add book page */}
         <PrivateRoute path="/add-book" component={Add} />
+        {/* list all members page */}
         <PrivateRoute path="/all-members" component={Members} />
+        {/* action logs page */}
         <PrivateRoute path="/action-logs" component={Logs} />
       </Switch>
     </div>

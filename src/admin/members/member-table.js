@@ -4,11 +4,17 @@ import { Table } from 'reactstrap';
 import MemberRow from './member-row';
 import '../admin.css';
 
+/**
+ * Member/User table
+ *
+ * @param {*} props
+ */
 const MemberTable = (props) => {
   const { members, updateOnEdit } = props;
 
   return (
     <div className="container body-sec">
+      {/* members table */}
       <Table className="members-table">
         <thead>
           <tr>
