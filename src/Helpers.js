@@ -12,7 +12,7 @@ import { NotificationManager } from 'react-notifications';
  * @returns
  */
 const send = (data, method = 'POST', path, headerRequired = true) => {
-  const url = 'http://127.0.0.1:5000';
+  const url = ' https://fast-stream-12738.herokuapp.com/';
   let headers = { 'Content-Type': 'application/json' };
   const body = JSON.stringify(data);
   const accessToken = localStorage.getItem('hb_access_token');
