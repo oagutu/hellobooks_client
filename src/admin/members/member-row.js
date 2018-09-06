@@ -20,7 +20,7 @@ class MemberRow extends Component {
 
   render() {
     const {
-      value, username, email, name, acc_status,
+      value, username, email, name, acc_status, updateOnEdit,
     } = this.props;
     const { show } = this.state;
     return (
@@ -37,7 +37,7 @@ class MemberRow extends Component {
         <Modal isOpen={show} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Edit User Status:</ModalHeader>
           <ModalBody>
-            <EditRoleForm user={username} />
+            <EditRoleForm user={username} toggle={this.toggle} updateOnEdit={updateOnEdit} />
           </ModalBody>
         </Modal>
       </tr>
@@ -51,6 +51,7 @@ MemberRow.propTypes = {
   email: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   acc_status: PropTypes.string.isRequired,
+  updateOnEdit: PropTypes.func.isRequired,
 };
 
 export default MemberRow;

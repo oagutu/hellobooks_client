@@ -1,15 +1,13 @@
 /** Edit user role/status form */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from 'reactstrap';
+import { NotificationManager } from 'react-notifications';
 import send from '../../Helpers';
 import '../admin.css';
 
 class EditRoleForm extends Component {
   state = {
-    user_details: { new_status: '', user: '' },
-    showAlert: false,
-    errorMessage: '',
+    user_details: { new_status: 'member', user: '' },
   }
 
   componentDidMount = () => {
@@ -21,16 +19,15 @@ class EditRoleForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { user_details, showAlert } = this.state;
+    const { user_details } = this.state;
+    const { toggle, updateOnEdit } = this.props;
     // console.log(this.state)
     send(user_details, 'POST', '/api/v1/auth/users/status_change')
       .then(response => (response.json()))
       .then((data) => {
-      // console.log(data);
-        this.setState({
-          showAlert: !showAlert,
-          errorMessage: data.msg,
-        });
+        toggle();
+        updateOnEdit(user_details);
+        NotificationManager.success(data.msg, 'Change user status:');
       });
   }
 
@@ -43,19 +40,13 @@ class EditRoleForm extends Component {
     }
 
     render() {
-      // console.log(this.props)
-      const { showAlert, errorMessage } = this.state;
       return (
 
         <form className="container edit-role-form" onSubmit={this.handleSubmit}>
-          <Alert isOpen={showAlert} color="warning">
-            {errorMessage}
-          </Alert>
-
           <select id="user-role" onChange={this.handleChange}>
             <option value="select_role" disabled>Select role</option>
             <option value="admin">admin</option>
-            <option value="member">member</option>
+            <option value="member" selected>member</option>
             <option value="suspended">suspended</option>
             <option value="banned">banned</option>
           </select>
@@ -67,6 +58,8 @@ class EditRoleForm extends Component {
 
 EditRoleForm.propTypes = {
   user: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  updateOnEdit: PropTypes.func.isRequired,
 };
 
 export default EditRoleForm;

@@ -38,23 +38,19 @@ class AddEdit extends Component {
       e.preventDefault();
       this.setState({ showAlert: false });
       let { bookDetails } = this.state;
-      const { showAlert } = this.state;
+      const { toggle, isHeader } = this.props;
       // Helps convert book code to integer type as is required by  add book endpoint.
       bookDetails = Object.assign({},
         bookDetails,
-        { book_code: Number(bookDetails.book_code) });
+        { ddc_code: String(bookDetails.ddc_code), book_code: Number(bookDetails.book_code) });
       const { method, path, history } = this.props;
 
       send(bookDetails, method, path)
         .then(response => (
           response.json()))
         .then((data) => {
-          console.log(data);
           if (Object.values(data).toString().includes('Successfully')) {
-            this.setState({
-              showAlert: !showAlert,
-              errorMessage: data.msg,
-            });
+            if (isHeader) { toggle(bookDetails); }
             history.push({ pathname: '/home' });
             NotificationManager.success(data.msg, 'Add/edit book:');
           } else {
@@ -88,10 +84,10 @@ class AddEdit extends Component {
             </label><br />
             {/* <br /> */}
             <label htmlFor="book_code">book code
-              <input type="number" id="book_code" placeholder="code" onChange={this.handleChange} value={bookDetails.book_code} required />
+              <input type="number" id="book_code" placeholder="isbn code" onChange={this.handleChange} value={bookDetails.book_code} required />
             </label> <br />
             <label htmlFor="ddc_code">DDC code
-              <input type="text" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={bookDetails.ddc_code} required />
+              <input type="number" id="ddc_code" placeholder="DDC code" onChange={this.handleChange} value={bookDetails.ddc_code} required />
             </label><br />
             <label htmlFor="author">author
               <input type="text" id="author" placeholder="author" onChange={this.handleChange} value={bookDetails.author} required />
@@ -153,7 +149,7 @@ class AddEdit extends Component {
               </select>
             </label>
             <br />
-            <input type="submit" value="add book" className="savebook_btn" />
+            <input type="submit" value="add/edit book" className="savebook_btn" />
           </form>
         </div>
       );
@@ -163,6 +159,7 @@ class AddEdit extends Component {
 AddEdit.defaultProps = {
   isHeader: false,
   details: {},
+  toggle: () => {},
 };
 
 /** Offers typechecking for the AddEdit component props */
@@ -172,6 +169,7 @@ AddEdit.propTypes = {
   method: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   history: PropTypes.shape().isRequired,
+  toggle: PropTypes.func,
 };
 
 export default withRouter(AddEdit);

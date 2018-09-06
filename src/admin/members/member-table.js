@@ -5,7 +5,7 @@ import MemberRow from './member-row';
 import '../admin.css';
 
 const MemberTable = (props) => {
-  const { members } = props;
+  const { members, updateOnEdit } = props;
 
   return (
     <div className="container body-sec">
@@ -29,6 +29,7 @@ const MemberTable = (props) => {
               name={m.name}
               email={m.email}
               acc_status={m.acc_status}
+              updateOnEdit={updateOnEdit}
             />))}
         </tbody>
       </Table>
@@ -38,6 +39,7 @@ const MemberTable = (props) => {
 
 MemberTable.propTypes = {
   members: PropTypes.shape().isRequired,
+  updateOnEdit: PropTypes.func.isRequired,
 };
 
 export default MemberTable;

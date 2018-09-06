@@ -28,6 +28,22 @@ class Home extends Component {
       });
   };
 
+  updateOnAction = (book, isDelete) => {
+    if (isDelete) {
+      let { results } = this.state;
+      results = Object.assign({}, results);
+      results.books = results.books.filter(bk => bk.book_id !== book);
+      this.setState({ results });
+    } else {
+      const { results } = this.state;
+      const edited_book = results.books.filter(detail => detail.value === book.book_id)[0];
+      const index_edited = results.books.indexOf(edited_book);
+      const updated_book = Object.assign({}, book, { book_id: book.value });
+      results.books[index_edited] = updated_book;
+      this.setState({ results });
+    }
+  };
+
   /** Handle page requests ie. pagination */
   handlePagination = (e) => {
     const { history } = this.props;
@@ -67,6 +83,7 @@ class Home extends Component {
           isNotPrev={results.current_page === 1 || isSearch}
           current={results.current_page}
           handleChange={this.handleChange}
+          updateOnAction={this.updateOnAction}
         />
         <div className="container tot-pages">
           <div className="row">
