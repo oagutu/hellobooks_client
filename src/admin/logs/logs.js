@@ -28,7 +28,7 @@ class Log extends Component {
         this.setState({ user_logs: data.logs, count: data.count });
       })
       .catch(() => {
-        sessionExpire(history);
+        // sessionExpire(history);
       });
 
     send({}, 'GET', '/api/v1/users/books/logs')
@@ -37,7 +37,7 @@ class Log extends Component {
         this.setState({ book_logs: data.logs, count: data.count });
       })
       .catch(() => {
-        sessionExpire(history);
+        // sessionExpire(history);
       });
   }
 

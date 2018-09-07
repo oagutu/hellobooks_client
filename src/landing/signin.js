@@ -48,7 +48,7 @@ class SigninForm extends Component {
      */
     handleSubmit = (e) => {
       e.preventDefault();
-      const { user_details, showAlert } = this.state;
+      const { user_details } = this.state;
       const { history } = this.props;
       this.setState({ showAlert: false });
       send(user_details, 'POST', '/api/v1/auth/login')

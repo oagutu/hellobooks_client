@@ -6,6 +6,8 @@ import MemberTable from './member-table';
 import '../admin.css';
 
 
+export const fetchData = () => send({}, 'GET', '/api/v1/auth/users');
+
 /**
  * Main member component
  *
@@ -21,11 +23,11 @@ class MemberMain extends Component {
    * @memberof MemberMain
    */
   componentDidMount = () => {
-    send({}, 'GET', '/api/v1/auth/users')
+    fetchData()
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ members: data });
-      //   console.log(this.state)
+        console.log(typeof data);
       });
   }
 

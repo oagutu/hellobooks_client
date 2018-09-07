@@ -1,5 +1,7 @@
 {
-    "plugin": "react",
+    "plugins": [
+        "react"
+    ],
     "extends": "airbnb",
     "rules": {
         "react/jsx-filename-extension": "off",
@@ -10,6 +12,7 @@
     "parser": "babel-eslint",
     "env": {
         "browser": true,
-        "jquery": true
+        "jquery": true,
+        "jest": true
     }
 }
