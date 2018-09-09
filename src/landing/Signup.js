@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { Alert } from 'reactstrap';
 import { NotificationManager } from 'react-notifications';
 import send from '../Helpers';
@@ -107,4 +107,4 @@ SignupForm.propTypes = {
   toggle: PropTypes.func.isRequired,
 };
 
-export default withRouter(SignupForm);
+export default SignupForm;

@@ -16,7 +16,7 @@ const response = [
     status: 'valid',
   },
 ];
-
+const history = createMemoryHistory('/borrow-history');
 
 it('componentDidMount runs', async () => {
   window.fetchData = jest.fn().mockImplementation(() => ({
@@ -28,7 +28,6 @@ it('componentDidMount runs', async () => {
     }),
   }));
 
-  const history = createMemoryHistory('/borrow-history');
   const renderedComponent = await mount(<Router><History history={history} /></Router>);
   await renderedComponent.update();
   renderedComponent.setState({ borrow_details: response });

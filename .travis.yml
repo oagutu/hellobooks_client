@@ -8,7 +8,7 @@ cache:
     - node_modules
 
 install:
-  - npm install --dev coveralls
+  - npm install
 
 script:
   - npm test

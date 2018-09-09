@@ -16,7 +16,6 @@ const user_data = [
   },
 ];
 
-
 it('Profile componentDidMount runs', async () => {
   window.fetchData = jest.fn().mockImplementation(() => ({
     status: 200,

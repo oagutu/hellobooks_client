@@ -14,3 +14,10 @@ it('check input change on user action', () => {
   const wrapper = mount(<Router><Signin handleChange={handleChange} /></Router>);
   wrapper.find('#username_login').simulate('change');
 });
+
+it('toggles signup modals', () => {
+  const wrapper = mount(<Router><Signin /></Router>);
+  expect(wrapper.find('.signup-modal').props().isOpen).toEqual(false);
+  wrapper.find('Button.signup-btn').simulate('click');
+  expect(wrapper.find('Modal.signup-modal').props().isOpen).toEqual(true);
+});

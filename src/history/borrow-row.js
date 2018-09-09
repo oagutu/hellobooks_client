@@ -88,6 +88,7 @@ class BorrowHistory extends Component {
             </div>
             <div className="confirm-return">
               <Button
+                id="return_bk"
                 onClick={this.handleReturn}
                 style={{ backgroundColor: 'green', float: 'right' }}
               >

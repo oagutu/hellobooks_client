@@ -27,6 +27,19 @@ const members = [
   },
 ];
 
+// memberRow component
+const m = members[0];
+const memberRow = mount(
+  <MemberRow
+    value={m.user_id}
+    username={m.username}
+    name={m.name}
+    email={m.email}
+    acc_status={m.acc_status}
+    updateOnEdit={jest.fn()}
+  />,
+);
+
 it('renders main members component', () => {
   const wrapper = shallow(<Router><Members /></Router>);
 
@@ -35,50 +48,31 @@ it('renders main members component', () => {
 });
 
 it('renders members table component', () => {
-  const wrapper = mount(<Router><MemberTable members={members} /></Router>);
+  const wrapper = mount(
+    <Router>
+      <MemberTable members={members} updateOnEdit={jest.fn()} />
+    </Router>,
+  );
   expect(wrapper.find('.members-table')).toBeDefined();
   expect(wrapper.find('MemberRow')).toHaveLength(2);
 });
 
 it('renders edit member status modal', () => {
-  const m = members[0];
-  const wrapper = mount(
-    <Router>
-      <MemberRow
-        value={m.user_id}
-        username={m.username}
-        name={m.name}
-        email={m.email}
-        acc_status={m.acc_status}
-      />
-    </Router>,
-  );
-  expect(wrapper.find('Modal')).toBeDefined();
+  expect(memberRow.find('Modal')).toBeDefined();
 });
 
 it('renders edit user role component', () => {
-  const m = members[0];
+  const member = members[0];
   const wrapper = shallow(
     <Router>
-      <EditRole user={m.username} />
+      <EditRole user={member.username} updateOnEdit={jest.fn()} />
     </Router>,
   );
   expect(wrapper.find('.user-role')).toBeDefined();
 });
 
-// it('Members componentDidMount runs', async () => {
-//   window.fetchData = jest.fn().mockImplementation(() => ({
-//     status: 200,
-//     json: () => new Promise((resolve) => {
-//       resolve(
-//         members,
-//       );
-//     }),
-//   }));
-
-//   const renderedComponent = await mount(<Members />);
-//   await renderedComponent.update();
-//   renderedComponent.setState({ members });
-//   console.log(renderedComponent.state());
-//   expect(renderedComponent.state('members').length).toEqual(2);
-// });
+it('handle edit role state change', () => {
+  expect(memberRow.state().show).toEqual(false);
+  memberRow.find('button').simulate('click');
+  expect(memberRow.state().show).toEqual(true);
+});

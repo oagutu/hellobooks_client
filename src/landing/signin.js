@@ -121,7 +121,7 @@ class SigninForm extends Component {
             Don&apos;t have an account?<Button onClick={this.toggle} className="signup-btn">Sign Up</Button>
           </p>
 
-          <Modal isOpen={show} toggle={this.toggle}>
+          <Modal isOpen={show} toggle={this.toggle} className="signup-modal">
             <ModalHeader toggle={this.toggle}>sign up</ModalHeader>
             <ModalBody>
               <SignupForm toggle={this.toggle} />

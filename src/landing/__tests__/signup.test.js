@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { mount } from 'enzyme';
-// import fetchMock from 'fetch-mock';
+import fetchMock from 'fetch-mock';
 import Signup from '../Signup';
 
 it('renders signup form', () => {
@@ -11,9 +11,9 @@ it('renders signup form', () => {
 });
 
 it('check input change on user action', () => {
-  const handleSubmit = jest.fn();
+  const handleChange = jest.fn();
   const toggle = jest.fn();
-  const wrapper = mount(<Router><Signup toggle={toggle} handleSubmit={handleSubmit} /></Router>);
+  const wrapper = mount(<Router><Signup toggle={toggle} handleChange={handleChange} /></Router>);
   wrapper.find('.signup-form').simulate('change');
 });
 
