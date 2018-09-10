@@ -41,7 +41,7 @@ class MemberRow extends Component {
         <td value={name}>{name}</td>
         <td value={acc_status}>{acc_status}</td>
         <td value="edit">
-          <Button onClick={this.toggle} className="signup-btn"><i className="fa fa-edit" /></Button>
+          <Button onClick={this.toggle} className="edit-role-modal-btn"><i className="fa fa-edit" /></Button>
         </td>
 
         <Modal isOpen={show} toggle={this.toggle}>

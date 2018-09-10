@@ -46,7 +46,8 @@ class Profile extends Component {
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ user_details: data.user_data, image });
-      });
+      })
+      .catch();
   }
 
   /**

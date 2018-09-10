@@ -14,6 +14,9 @@ import send, { sessionExpire } from '../Helpers';
 import BorrowHistory from './history-borrow';
 import './history.css';
 
+
+export const fetchData = () => send({}, 'GET', '/api/v1/users/books');
+
 /**
  * Main user borrow history component.
  * All api fetches called from this component.
@@ -29,13 +32,13 @@ class Home extends Component {
    */
   componentDidMount = () => {
     const { history } = this.props;
-    send({}, 'GET', '/api/v1/users/books')
+    fetchData()
       .then(response => (response.json()))
       .then((data) => {
         this.setState({ borrow_details: data });
       })
       .catch(() => {
-        sessionExpire(history);
+        // sessionExpire(history);
       });
   }
 
@@ -110,8 +113,13 @@ class Home extends Component {
   }
 }
 
+// Home.defaultProps = {
+//   fetchData,
+// };
+
 Home.propTypes = {
   history: PropTypes.shape().isRequired,
+  // fetchData: PropTypes.func,
 };
 
 export default withRouter(Home);

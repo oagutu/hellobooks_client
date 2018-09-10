@@ -24,7 +24,7 @@ class Home extends Component {
         this.setState({ results: data });
       })
       .catch(() => {
-        sessionExpire(history);
+        // sessionExpire(history);
       });
   };
 
