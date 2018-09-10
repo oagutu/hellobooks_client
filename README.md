@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/oagutu/hellobooks_client.svg?branch=debvelop)](https://travis-ci.org/oagutu/hellobooks_client)
-[![Coverage Status](https://coveralls.io/repos/github/oagutu/hellobooks_client/badge.svg?branch=develop)](https://coveralls.io/github/oagutu/hellobooks_client?branch=develop)
+[![Build Status](https://travis-ci.org/oagutu/hellobooks_client.svg?branch=master)](https://travis-ci.org/oagutu/hellobooks_client)
+[![Coverage Status](https://coveralls.io/repos/github/oagutu/hellobooks_client/badge.svg?branch=master)](https://coveralls.io/github/oagutu/hellobooks_client?branch=develop)
 
 # hellobooks_client
 
@@ -29,12 +29,18 @@ The hellobooks client app is built on `reactjs`
 
  ```cd hellobooks_client```
 
- - install the requisite packages: ```npm install```
+ - install the requisite packages:
+ 
+ ```npm install```
 
- - Run the app: ```npm start```
+ - Run the app:
+ 
+ ```npm start```
    
    It should be accessible locally on http://localhost:3000
 
- - Testing: ```npm test```
+ - Testing: 
+ 
+ ```npm test```
 
 
