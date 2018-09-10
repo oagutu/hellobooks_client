@@ -1,0 +1,57 @@
+.modal-body .body-sec {
+    margin-top: 0px;
+}
+
+.edit-book-btn, .delete-book-btn {
+    background-color: inherit;
+    color: tomato;
+    padding: 0.5px 3px;
+    border-color: transparent;
+    margin:1px 2px;
+}
+.edit-book-btn:hover, .delete-book-btn:hover {
+    background-color:tomato;
+    color: white;
+    border-color: transparent;
+}
+
+.delete_book_modal .modal-content .modal-body >div >p >span {
+    color:tomato;
+    text-decoration: underline;
+}
+
+.confirm-delete {
+    float: right;
+}
+
+.confirm-delete >button {
+    margin: auto 4px; 
+}
+
+/* Logs */
+
+.col-xs-6>h5{color: tomato;} 
+
+.col-xs-6 >table>tbody>tr:nth-child(odd){
+    background-color:#ff7259;
+    color:white;
+} 
+
+.log-row{
+    font-size:9.5px;
+}
+
+.log-row >td {
+    padding-top: 2px;
+    padding-bottom: 2px
+}
+.user-action-success, .recipient_id {
+    text-align: center;
+}
+
+#user-action-success {
+    color: tomato;
+    font-size: 12px;
+}
+
+/* Logs */
